@@ -17,17 +17,13 @@ export function MarketingHeader() {
         <Link href="/#curriculum" className={styles.link}>
           Curriculum
         </Link>
-        <Link href="/#community" className={styles.link}>
-          Community
-        </Link>
         <Link href="/#tuition" className={styles.link}>
           Tuition
         </Link>
-        {/* Sign-in and enrollment flows arrive with accounts (task 5). */}
-        <Link href="/parent" className={styles.link}>
+        <Link href="/start" className={styles.link}>
           Sign in
         </Link>
-        <Link href="/parent" className={styles.cta}>
+        <Link href="/start" className={styles.cta}>
           Begin enrollment
         </Link>
       </nav>

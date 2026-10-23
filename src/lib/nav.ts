@@ -19,7 +19,7 @@ export const topNav: NavItem[] = [
 export const parentNav: NavItem[] = [
   { label: "Dashboard", href: "/parent" },
   { label: "Teaching today", href: "/teaching" },
-  { label: "Students", href: "/parent/students" },
+  { label: "Students", href: "/settings#children" },
   { label: "Course manuals", href: "/course" },
   { label: "Calendar", href: "/calendar" },
   { label: "Records", href: "/records" },

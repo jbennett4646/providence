@@ -1,15 +1,62 @@
 import type { Metadata } from "next";
-import { Screen } from "@/components/Screen";
-import { ScreenPlaceholder } from "@/components/ScreenPlaceholder";
+import Link from "next/link";
+import { cx, ui } from "@/components/ui/Controls";
+import { MON_SAT } from "@/lib/domain/calendar";
+import { gradeLabel } from "@/lib/domain/grades";
+import { requireHousehold } from "@/server/session";
+import { SchoolDaysChoice } from "../calendar/client";
+import { AddChildForm, ChildForm, HouseholdForm } from "./client";
+import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Settings" };
 
-export default function SettingsPage() {
+export default async function SettingsPage() {
+  const h = await requireHousehold();
+  const mf = [...h.schoolDays].sort().join(",") !== MON_SAT.join(",");
   return (
-    <Screen label="Settings" tone="parchment">
-      <ScreenPlaceholder kicker="Household" title="Settings">
-        School days, holidays and the flex-day limit, household preferences, children, and plan and billing.
-      </ScreenPlaceholder>
-    </Screen>
+    <main data-screen-label="Settings" className={styles.screen}>
+      <div className={styles.wrap}>
+        <Link href="/parent" className={ui.back}>
+          ← Dashboard
+        </Link>
+        <div className={ui.kicker}>Household</div>
+        <h1 className={styles.title}>Settings</h1>
+
+        <section className={cx(ui.card, styles.box)}>
+          <div className={styles.boxTitle}>The household</div>
+          <HouseholdForm name={h.name} state={h.state} />
+        </section>
+
+        <section id="children" className={cx(ui.card, styles.box)}>
+          <div className={styles.boxTitle}>Children</div>
+          <div className={styles.boxSub}>One household covers every child. Students get their own login from Grade 6.</div>
+          {h.children.map((c) => (
+            <ChildForm key={c.id} id={c.id} name={c.name} grade={gradeLabel(c.grade)} mode={c.mode} priorDays={c.priorDays} canRemove={h.children.length > 1} />
+          ))}
+          <div className={styles.label}>Add a child</div>
+          <AddChildForm />
+        </section>
+
+        <section className={cx(ui.card, styles.box)}>
+          <div className={styles.boxTitle}>School days and holidays</div>
+          <div className={styles.row}>
+            <span>School week</span>
+            <SchoolDaysChoice value={mf ? "mf" : "ms"} />
+          </div>
+          <div className={styles.boxSub}>
+            The first day, federal holidays you teach on, and family breaks are set on the <Link href="/calendar">calendar</Link>. Sick and travel days are
+            marked on the day from Teaching, five a term.
+          </div>
+        </section>
+
+        <section className={cx(ui.card, styles.box)}>
+          <div className={styles.boxTitle}>Plan and billing</div>
+          <div className={styles.boxSub}>
+            Household plan, $100 a month, for any number of children. Parish and co-op plan, $500 a month, for several families. Cancel in any month. Subscriptions
+            open with sign-in; until then everything here is free to use.
+          </div>
+        </section>
+      </div>
+    </main>
   );
 }

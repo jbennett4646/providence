@@ -1,0 +1,39 @@
+.tabs {
+  display: flex;
+  gap: 2px;
+}
+.tab {
+  position: relative;
+  padding: 13px 22px;
+  cursor: pointer;
+  background: var(--pa-card);
+  border: 1px solid var(--pa-rule-2);
+  border-bottom: none;
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  font-family: var(--pa-font-ui);
+  color: var(--pa-ink);
+}
+.on::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  top: -1px;
+  height: 3px;
+  background: var(--pa-deep);
+}
+.name {
+  font-family: var(--pa-font-display);
+  font-size: 17px;
+}
+.grade {
+  font-size: 11px;
+  color: var(--pa-text-5);
+}
+.pills {
+  display: flex;
+  gap: 6px;
+  margin-top: 16px;
+}

@@ -1,0 +1,103 @@
+.hero {
+  background: var(--pa-ink);
+  color: var(--pa-on-dark);
+}
+
+.heroInner {
+  max-width: var(--pa-max-faq);
+  margin: 0 auto;
+  padding: 80px var(--pa-gutter) 72px;
+}
+
+.kicker {
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--pa-accent);
+  margin-bottom: 18px;
+}
+
+.title {
+  font-size: 54px;
+  line-height: 1.05;
+  margin: 0 0 18px;
+  letter-spacing: -0.01em;
+  max-width: 18ch;
+  text-wrap: pretty;
+}
+
+.lede {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--pa-on-dark-muted);
+  margin: 0;
+  max-width: 52ch;
+  text-wrap: pretty;
+}
+
+.ledeLink,
+.ledeLink:hover {
+  color: var(--pa-on-dark-soft);
+  border-bottom: 1px solid var(--pa-text-4);
+}
+
+.body {
+  max-width: var(--pa-max-faq);
+  margin: 0 auto;
+  padding: 40px var(--pa-gutter) 96px;
+}
+
+.group {
+  display: grid;
+  grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+  gap: 40px;
+  padding: 34px 0 10px;
+  border-top: 1px solid var(--pa-rule-5);
+}
+
+/* Styled as the prototype's small caps label; an h2 for document outline. */
+.groupLabel {
+  font-family: var(--pa-font-ui);
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--pa-accent);
+  padding-top: 28px;
+  margin: 0;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 22px 0;
+  border-bottom: 1px solid #ddd0b5;
+}
+
+.question {
+  font-size: 22px;
+  line-height: 1.25;
+  margin: 0;
+  letter-spacing: normal;
+}
+
+.answer {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--pa-text-2);
+  margin: 0;
+  max-width: 62ch;
+  text-wrap: pretty;
+}
+
+.answerLink,
+.answerLink:hover {
+  color: var(--pa-deep);
+  border-bottom: 1px solid #c4a78c;
+}

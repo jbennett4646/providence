@@ -29,7 +29,7 @@ import {
 export const plan = pgEnum("plan", ["household", "parish"]);
 export const teachingMode = pgEnum("teaching_mode", ["screen", "paper"]);
 export const trackKind = pgEnum("track_kind", ["daily", "queue", "weekly"]);
-export const streakStatus = pgEnum("streak_status", ["done", "sick"]);
+export const streakStatus = pgEnum("streak_status", ["done", "sick", "travel"]);
 export const itemOutcome = pgEnum("item_outcome", ["well"]);
 
 const createdAt = () => timestamp("created_at", { withTimezone: true }).notNull().defaultNow();
@@ -66,6 +66,8 @@ export const households = pgTable("households", {
   schoolDays: smallint("school_days").array().notNull().default(sql`'{1,2,3,4,5}'::smallint[]`),
   /** First day of the school year; the calendar lays out 36 weeks from it. */
   calStart: date("cal_start"),
+  /** IANA time zone the household's "today" is reckoned in. */
+  timezone: text("timezone").notNull().default("America/New_York"),
   /** Small per-household UI preferences, e.g. { weekNoteSeen: true }. */
   prefs: jsonb("prefs").$type<Record<string, unknown>>().notNull().default({}),
   createdAt: createdAt(),
@@ -207,6 +209,42 @@ export const itemRecords = pgTable(
   ],
 );
 
+/**
+ * What was recorded today on each Teaching card: the prototype's `today`
+ * state. One row per course and track group (daily core or weekly work) per
+ * day; it drives the card's "Recorded" line and its Undo.
+ */
+export const teachingEntries = pgTable(
+  "teaching_entries",
+  {
+    childId: uuid("child_id")
+      .notNull()
+      .references(() => children.id, { onDelete: "cascade" }),
+    date: date("date").notNull(),
+    grade: smallint("grade").notNull(),
+    courseId: text("course_id").notNull(),
+    /** 'd' for the daily core, 'q' for the week's work. */
+    lane: text("lane").notNull(),
+    week: smallint("week").notNull(),
+    track: trackKind("track").notNull(),
+    itemKey: text("item_key").notNull(),
+    /** 'well' (done) or 'again' (needs another day). */
+    outcome: text("outcome").notNull(),
+    /** The course position before this entry, and whether the entry finished the week. */
+    prevPos: smallint("prev_pos").notNull(),
+    advanced: boolean("advanced").notNull().default(false),
+    /** The parent moved on to the next item, so the card shows it in full again. */
+    cleared: boolean("cleared").notNull().default(false),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.childId, t.date, t.courseId, t.lane] }),
+    foreignKey({ columns: [t.grade, t.courseId], foreignColumns: [courses.grade, courses.id] }),
+    check("teaching_entries_lane", sql`${t.lane} in ('d', 'q')`),
+    check("teaching_entries_outcome", sql`${t.outcome} in ('well', 'again')`),
+  ],
+);
+
 export type ExtraActivity = { label: string; mins: number };
 
 /** A school day logged: the prototype's `att[date] = { routine, extra[] }`. */
@@ -221,6 +259,8 @@ export const attendanceDays = pgTable(
     routineMins: integer("routine_mins").notNull().default(0),
     /** Other instruction that counts toward the day, e.g. { label: 'Free active play', mins: 60 }. */
     extra: jsonb("extra").$type<ExtraActivity[]>().notNull().default([]),
+    /** Paper mode: the day's routine was done from the booklets (routine minutes are a usual day's). */
+    paperRoutine: boolean("paper_routine").notNull().default(false),
   },
   (t) => [primaryKey({ columns: [t.childId, t.date] }), check("attendance_routine_mins", sql`${t.routineMins} >= 0`)],
 );
@@ -300,6 +340,11 @@ export const childrenRelations = relations(children, ({ one, many }) => ({
   streak: many(streakDays),
   checkins: many(checkins),
   printed: many(printedDocs),
+  teachingEntries: many(teachingEntries),
+}));
+
+export const teachingEntriesRelations = relations(teachingEntries, ({ one }) => ({
+  child: one(children, { fields: [teachingEntries.childId], references: [children.id] }),
 }));
 
 export const calendarBreaksRelations = relations(calendarBreaks, ({ one }) => ({

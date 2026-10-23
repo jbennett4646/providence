@@ -16,7 +16,7 @@ describe("isActive", () => {
   });
 
   it("lights Parent for the parent sub-areas", () => {
-    for (const p of ["/parent", "/parent/students", "/course/latin", "/calendar", "/settings"]) {
+    for (const p of ["/parent", "/course/latin", "/calendar", "/settings"]) {
       expect(isActive(top("Parent"), p)).toBe(true);
     }
     expect(isActive(top("Parent"), "/records")).toBe(false);
@@ -25,6 +25,6 @@ describe("isActive", () => {
   it("uses exact matching for the sidebar", () => {
     const dashboard = parentNav.find((i) => i.label === "Dashboard")!;
     expect(isActive(dashboard, "/parent", true)).toBe(true);
-    expect(isActive(dashboard, "/parent/students", true)).toBe(false);
+    expect(isActive(dashboard, "/parent/x", true)).toBe(false);
   });
 });

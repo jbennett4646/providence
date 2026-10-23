@@ -53,8 +53,20 @@ export async function migrate(db: Db): Promise<void> {
 
 let shared: Promise<Db> | undefined;
 
-/** The app's shared connection, opened on first use. */
+/**
+ * The app's shared connection, opened on first use. The embedded development
+ * database migrates itself and imports the course catalog on first use; a
+ * real Postgres is set up with `npm run db:setup`.
+ */
 export function getDb(): Promise<Db> {
-  shared ??= connect();
+  shared ??= (async () => {
+    const db = await connect();
+    if (drivers.get(db) === "pglite") {
+      await migrate(db);
+      const { importCatalog } = await import("./catalog");
+      await importCatalog(db);
+    }
+    return db;
+  })();
   return shared;
 }

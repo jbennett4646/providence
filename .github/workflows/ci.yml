@@ -35,7 +35,7 @@ jobs:
       - name: Test (PGlite)
         run: npm test
       - name: Test (Postgres 16)
-        run: npx vitest run src/db
+        run: npx vitest run --no-file-parallelism src/db src/server
         env:
           TEST_DATABASE_URL: postgres://pha:pha@localhost:5432/pha
       - run: npm run build

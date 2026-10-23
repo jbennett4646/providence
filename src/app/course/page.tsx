@@ -1,15 +1,13 @@
-import type { Metadata } from "next";
-import { Screen } from "@/components/Screen";
-import { ScreenPlaceholder } from "@/components/ScreenPlaceholder";
+import { redirect } from "next/navigation";
+import { getCourseIndex } from "@/lib/content/load";
+import { requireHousehold, selectedChild } from "@/server/session";
+import { childProgress } from "@/server/views";
 
-export const metadata: Metadata = { title: "Course manuals" };
-
-export default function CourseManualsPage() {
-  return (
-    <Screen label="Course manual" tone="parchment">
-      <ScreenPlaceholder kicker="Grade 3" title="Course manuals">
-        Year plans, term manuals, reference pages and answer keys for every course.
-      </ScreenPlaceholder>
-    </Screen>
-  );
+/** Course manuals open on the selected child's floor course. */
+export default async function CourseIndex() {
+  const h = await requireHousehold();
+  const child = await selectedChild(h.children);
+  const floor = child ? childProgress(child).floor : null;
+  const id = floor?.course.courseId ?? getCourseIndex(child?.grade ?? 3)[0]?.id ?? getCourseIndex(3)[0].id;
+  redirect(`/course/${id}`);
 }

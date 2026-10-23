@@ -35,4 +35,19 @@ Without `DATABASE_URL`, development uses an embedded Postgres (PGlite) stored in
 - `src/lib/content/`: the course content loader, schema and year arithmetic (weeks, terms, gate weeks).
 - `src/db/`: schema, connection, catalog import and household queries.
 
-Each prototype `screen` is a route: `/` (landing), `/faq`, `/parent`, `/teaching`, `/course`, `/student`, `/calendar` and `/records`, plus `/settings`. Apart from the shell, screens are placeholders until they are ported.
+## Screens
+
+Each prototype `screen` is a route:
+
+- Public: `/` (landing), `/faq`, `/student` (locked until Grade 6).
+- `/start`: set up a household and its first child (name, grade, first day, days taught elsewhere, screen or paper). This replaces the prototype's demo seeds.
+- `/parent` (dashboard), `/teaching`, `/course/[courseId]` (manuals; `?tab=0` year plan, `?tab=1..6` terms, `&item=glance|refN|wN|afterN`), `/calendar`, `/records` (`?tab=log|portfolio|transcript`), `/settings`.
+- `/print?child=…&docs=3:latin:plan,3:latin:t1`: a booklet laid out for printing, which records the booklets as printed.
+
+Until accounts arrive, the household is remembered by an unguessable id in an httpOnly cookie set on `/start`; the selected child is a second cookie. `src/server/session.ts` is the one place to swap for real sign-in.
+
+## Where the logic lives
+
+- `src/lib/domain/`: pure, tested rules: dates, federal holidays, the 180-day calendar, course helpers and mastery lines, term-check transitions and term locking, the floor rule, attendance, the streak, the daily sententia, and per-state compliance config (`compliance.ts`, Georgia only for now).
+- `src/server/mutations.ts`: every change as a database operation (recording items, undo, term checks, review weeks, paper check-ins, attendance, calendar, settings). `src/app/actions.ts` wraps each as a server action that checks the child belongs to the household.
+- `src/server/teaching.ts`, `views.ts`, `state.ts`: what each screen shows, built from the record and the course content.

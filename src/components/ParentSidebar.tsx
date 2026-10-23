@@ -23,7 +23,7 @@ export function ParentSidebar({ householdName, householdMeta, badges = {} }: Par
       </div>
       <nav className={styles.nav} aria-label="Parent">
         {parentNav.map((item) => {
-          const active = !item.href.includes("#") && isActive(item, pathname, true);
+          const active = !item.href.includes("#") && isActive(item, pathname, item.href === "/parent");
           return (
             <Link
               key={item.href}
