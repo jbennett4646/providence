@@ -105,9 +105,9 @@ export default async function RecordsPage({ searchParams }: { searchParams: Prom
           </div>
           <div className={styles.headActions}>
             <PrintTranscript onTranscript={tab === "transcript"} href={href("transcript")} />
-            <span className={cx(ui.btn, ui.inactive)} title="The Declaration of Intent and annual report are being built">
-              File with the state · soon
-            </span>
+            <Link href="/records/forms" className={cx(ui.btn, ui.dark)}>
+              {ctx.rules?.code === "GA" ? "File with the state" : "State forms"}
+            </Link>
           </div>
         </div>
 

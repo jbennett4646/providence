@@ -74,6 +74,14 @@ export const households = pgTable("households", {
   prefs: jsonb("prefs").$type<Record<string, unknown>>().notNull().default({}),
   /** Set when sign-up's onboarding steps are finished. */
   onboardedAt: timestamp("onboarded_at", { withTimezone: true }),
+  // For the state forms (Declaration of Intent): the instructing parent and where home study happens.
+  parentName: text("parent_name"),
+  addressLine1: text("address_line1"),
+  addressLine2: text("address_line2"),
+  city: text("city"),
+  county: text("county"),
+  postalCode: text("postal_code"),
+  phone: text("phone"),
   // Billing (Stripe). One subscription covers the whole household.
   stripeCustomerId: text("stripe_customer_id").unique(),
   subscriptionId: text("subscription_id").unique(),
@@ -209,6 +217,8 @@ export const children = pgTable(
     mode: teachingMode("mode").notNull().default("screen"),
     /** School days taught elsewhere this year before joining, so the 180 count is right. */
     priorDays: smallint("prior_days").notNull().default(0),
+    /** For the ages on the Declaration of Intent. */
+    birthDate: date("birth_date"),
     sortOrder: smallint("sort_order").notNull().default(0),
     createdAt: createdAt(),
   },
@@ -413,6 +423,39 @@ export const printedDocs = pgTable(
     foreignKey({ columns: [t.grade, t.courseId], foreignColumns: [courses.grade, courses.id] }),
     check("printed_docs_doc", sql`${t.doc} ~ '^(plan|t[1-6]|r[1-5])$'`),
   ],
+);
+
+// ---------------------------------------------------------------------------
+// State forms
+
+/** The parent's words for the annual progress report, one per required subject per school year. */
+export const reportNotes = pgTable(
+  "report_notes",
+  {
+    childId: uuid("child_id")
+      .notNull()
+      .references(() => children.id, { onDelete: "cascade" }),
+    /** The school year's first day. */
+    schoolYear: date("school_year").notNull(),
+    subject: text("subject").notNull(),
+    note: text("note").notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [primaryKey({ columns: [t.childId, t.schoolYear, t.subject] })],
+);
+
+/** When the family filed a form with the state, e.g. the Declaration of Intent for a school year. */
+export const filings = pgTable(
+  "filings",
+  {
+    householdId: uuid("household_id")
+      .notNull()
+      .references(() => households.id, { onDelete: "cascade" }),
+    form: text("form").notNull(),
+    schoolYear: date("school_year").notNull(),
+    filedOn: date("filed_on").notNull(),
+  },
+  (t) => [primaryKey({ columns: [t.householdId, t.form, t.schoolYear] })],
 );
 
 // ---------------------------------------------------------------------------

@@ -43,8 +43,13 @@ Each prototype `screen` is a route:
 - `/start`: sign-up and onboarding: household and parent account → children and grades → placement (each course's starting term, electives) → first day and days taught elsewhere → screen or paper. This replaces the prototype's demo seeds.
 - `/sign-in`, `/forgot`, `/reset`: parents sign in with email, students (Grade 6+) with a username.
 - `/billing`: plans, Stripe Checkout and the billing portal, and joining a parish or co-op by invite code.
+- `/records/forms`: the state forms. The details the Declaration of Intent needs (instructing parent, home-study address and county, each child's date of birth), the parent's assessment per required subject for the annual progress report, and the date the declaration was filed. The PDFs come from `/api/forms/declaration` and `/api/forms/report?child=…`.
 - `/parent` (dashboard), `/teaching`, `/course/[courseId]` (manuals; `?tab=0` year plan, `?tab=1..6` terms, `&item=glance|refN|wN|afterN`), `/calendar`, `/records` (`?tab=log|portfolio|transcript`), `/settings`.
 - `/print?child=…&docs=3:latin:plan,3:latin:t1`: a booklet laid out for printing, which records the booklets as printed.
+
+## State forms
+
+`src/server/forms/` builds the Declaration of Intent and the annual progress report from the record (`model.ts`) and renders them server-side with `@react-pdf/renderer` (`pdf.tsx`), embedding EB Garamond and Libre Franklin from `assets/fonts/` (SIL Open Font License; the licence files are alongside). The Georgia rules (due dates, the 12-month school year, ages, what the declaration must list) are in `src/lib/domain/forms.ts`. Other states get the progress report organised by Georgia's five subjects until their own rules are added to `compliance.ts`.
 
 ## Accounts and billing
 

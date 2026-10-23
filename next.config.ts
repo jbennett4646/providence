@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   serverExternalPackages: ["@electric-sql/pglite"],
   // Course content and migrations are read from disk at runtime.
   outputFileTracingIncludes: {
-    "/**": ["./content/**/*.json", "./drizzle/**/*"],
+    "/**": ["./content/**/*.json", "./drizzle/**/*", "./assets/fonts/*"],
   },
 };
 

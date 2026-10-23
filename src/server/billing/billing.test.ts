@@ -68,14 +68,15 @@ describe("Stripe events", () => {
   it("links the customer at checkout, then follows the subscription", async () => {
     const h = await createHousehold(db, { name: "Billing" });
     const customer = id("cus");
+    const subId = id("sub");
     await applyStripeEvent(db, {
       id: id("evt"),
       type: "checkout.session.completed",
-      data: { object: { client_reference_id: h.id, customer, subscription: "sub_x", metadata: {} } },
+      data: { object: { client_reference_id: h.id, customer, subscription: subId, metadata: {} } },
     } as unknown as Stripe.Event);
-    expect(await get(h.id)).toMatchObject({ stripeCustomerId: customer, subscriptionId: "sub_x" });
+    expect(await get(h.id)).toMatchObject({ stripeCustomerId: customer, subscriptionId: subId });
 
-    const sub = subscription({ id: "sub_x", customer, status: "active", price: "price_household", periodEnd: 1_900_000_000 });
+    const sub = subscription({ id: subId, customer, status: "active", price: "price_household", periodEnd: 1_900_000_000 });
     await applyStripeEvent(db, subEvent("customer.subscription.updated", sub));
     expect(await get(h.id)).toMatchObject({ subscriptionStatus: "active", plan: "household", cancelAtPeriodEnd: false });
     expect((await get(h.id)).currentPeriodEnd?.getTime()).toBe(1_900_000_000_000);

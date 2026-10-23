@@ -51,7 +51,13 @@ export async function migrate(db: Db): Promise<void> {
   }
 }
 
-let shared: Promise<Db> | undefined;
+/*
+ * One connection per process. Next.js can load this module more than once
+ * (pages and route handlers are bundled separately), so the connection is
+ * kept on globalThis; two PGlite instances on one data directory would not
+ * see each other's writes.
+ */
+const g = globalThis as typeof globalThis & { __phaDb?: Promise<Db> };
 
 /**
  * The app's shared connection, opened on first use. The embedded development
@@ -59,7 +65,7 @@ let shared: Promise<Db> | undefined;
  * real Postgres is set up with `npm run db:setup`.
  */
 export function getDb(): Promise<Db> {
-  shared ??= (async () => {
+  g.__phaDb ??= (async () => {
     const db = await connect();
     if (drivers.get(db) === "pglite") {
       await migrate(db);
@@ -68,5 +74,5 @@ export function getDb(): Promise<Db> {
     }
     return db;
   })();
-  return shared;
+  return g.__phaDb;
 }

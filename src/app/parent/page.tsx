@@ -11,6 +11,7 @@ import { addDays, fmtDayMonth, fmtKicker, fmtLong, fmtShort, yearOf, daysBetween
 import { gradeLabel, progymStage } from "@/lib/domain/progress";
 import { sententiaFor } from "@/lib/domain/sententia";
 import { firstSentence, masteryInfo } from "@/lib/domain/course";
+import { declarationStatus } from "@/server/forms/model";
 import { requireHousehold, selectedChild } from "@/server/session";
 import { householdContext, loadChildRecords, type Child, type HouseholdContext } from "@/server/state";
 import { childProgress, electiveOptions, liveCourses } from "@/server/views";
@@ -99,6 +100,7 @@ async function Dashboard({ child, ctx, sent, weekNoteSeen, yearTitle, dayNum, ne
   const live = liveCourses(child);
   const hasContent = live.length > 0;
   const att = summarize(records.attendance, minutesPerDay, child.priorDays);
+  const doi = await declarationStatus(ctx.household, ctx);
   const electives = electiveOptions(child);
   const chosen = electives.filter((e) => e.on);
   const floorLabel = floor?.label ?? gradeLabel(child.grade);
@@ -347,7 +349,9 @@ async function Dashboard({ child, ctx, sent, weekNoteSeen, yearTitle, dayNum, ne
                   <div className={styles.reportLabel}>Declaration of Intent</div>
                   <div className={styles.reportDetail}>Due within 30 days of starting, then by 1 September</div>
                 </div>
-                <span className={styles.reportValue}>Due {fmtDayMonth(addDays(cal.start, 30))}</span>
+                <span className={styles.reportValue}>
+                  {doi.filed ? `Filed ${fmtDayMonth(doi.filed.filedOn)}` : `Due ${fmtDayMonth(doi.due)}`}
+                </span>
               </div>
               <div className={styles.report}>
                 <div>
@@ -366,8 +370,8 @@ async function Dashboard({ child, ctx, sent, weekNoteSeen, yearTitle, dayNum, ne
                 <span className={styles.reportValue}>1 Sep {yearOf(cal.last)}</span>
               </div>
               <div className={styles.reportFoot}>
-                {rules.name} asks once a year. The Declaration of Intent and the annual report will be prepared from this
-                record.
+                {rules.name} asks once a year. The Declaration of Intent and the annual report are{" "}
+                <Link href="/records/forms">prepared from this record</Link>.
               </div>
             </>
           ) : (
