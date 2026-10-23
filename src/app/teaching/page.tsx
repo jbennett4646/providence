@@ -15,6 +15,7 @@ import {
 } from "@/components/teaching/Controls";
 import { PaperRow } from "@/components/teaching/PaperRow";
 import { PrintLink } from "@/components/teaching/PrintLink";
+import { ReadinessCard, ReadinessCheckin } from "@/components/teaching/Readiness";
 import styles from "@/components/teaching/Teaching.module.css";
 import { cx, CheckMark, ui } from "@/components/ui/Controls";
 import { EXTRA_OPTIONS, hm } from "@/lib/domain/attendance";
@@ -22,6 +23,7 @@ import { fmtKicker } from "@/lib/domain/dates";
 import { gradeLabel } from "@/lib/domain/grades";
 import { sententiaFor } from "@/lib/domain/sententia";
 import { requireHousehold, selectedChild } from "@/server/session";
+import { readinessToday, readinessView } from "@/server/readiness";
 import { householdContext, loadChildRecords, type Child, type ChildRecords, type HouseholdContext } from "@/server/state";
 import { paperTeaching, paperUsualMinutes, recitationThisWeek, screenTeaching, type TeachingCard } from "@/server/teaching";
 import { childProgress, liveCourses } from "@/server/views";
@@ -120,7 +122,7 @@ export default async function TeachingPage() {
           </div>
 
           {!hasContent ? null : mode === "paper" ? (
-            <PaperMode child={child} rec={rec} />
+            <PaperMode child={child} ctx={ctx} rec={rec} />
           ) : (
             <ScreenMode child={child} ctx={ctx} rec={rec} floorLabel={floorLabel} masthead={masthead} />
           )}
@@ -220,6 +222,7 @@ function ScreenMode({ child, ctx, rec, floorLabel, masthead }: { child: Child; c
   const { rows } = childProgress(child);
   const required = rows.filter((r) => !r.elective);
   const keys = [...t.daily, ...t.week].filter((c) => !c.compact && c.answers.length);
+  const readiness = readinessView(child, ctx, rec);
   return (
     <div>
       <div data-print-plain="1" className={styles.ledger}>
@@ -255,6 +258,7 @@ function ScreenMode({ child, ctx, rec, floorLabel, masthead }: { child: Child; c
         {t.daily.map((c) => (
           <Card key={c.id} card={c} childId={child.id} childName={child.name} />
         ))}
+        {readiness && <ReadinessCard v={readiness} childId={child.id} childName={child.name} today={ctx.today} />}
 
         <div data-print-keep="1" className={styles.section}>
           <div className={styles.sectionRow}>
@@ -329,8 +333,9 @@ function ScreenMode({ child, ctx, rec, floorLabel, masthead }: { child: Child; c
   );
 }
 
-function PaperMode({ child, rec }: { child: Child; rec: ChildRecords }) {
+function PaperMode({ child, ctx, rec }: { child: Child; ctx: HouseholdContext; rec: ChildRecords }) {
   const { rows, queue } = paperTeaching(child, rec);
+  const readiness = readinessView(child, ctx, rec);
   return (
     <div data-noprint="1" className={styles.paper}>
       <div className={styles.paperMain}>
@@ -346,6 +351,7 @@ function PaperMode({ child, rec }: { child: Child; rec: ChildRecords }) {
           {rows.map((r) => (
             <PaperRow key={r.courseId} childId={child.id} row={r} />
           ))}
+          {readiness && <ReadinessCheckin v={readiness} childId={child.id} today={ctx.today} />}
         </div>
 
         <div className={cx(ui.card, styles.logCard)}>
@@ -394,6 +400,7 @@ function TimeLog({ child, ctx, rec }: { child: Child; ctx: HouseholdContext; rec
   const total = routine + extra;
   const need = ctx.minutesPerDay;
   const paper = child.mode === "paper";
+  const practice = readinessToday(child, ctx).practiceMins;
   return (
     <div data-noprint="1" id="time" className={cx(ui.card, styles.time)}>
       <div className={styles.timeHead}>
@@ -420,7 +427,7 @@ function TimeLog({ child, ctx, rec }: { child: Child; ctx: HouseholdContext; rec
           </div>
           <div className={styles.timeNote}>
             {paper
-              ? `From the booklets: about ${hm(paperUsualMinutes(child))} on a usual day`
+              ? `From the booklets: about ${hm(paperUsualMinutes(child) + practice)} on a usual day${practice ? ", with the test readiness practice" : ""}`
               : "Added up from the items recorded above, using each course’s routine times"}
           </div>
           {paper && <PaperRoutineToggle childId={child.id} on={!!day?.paperRoutine} />}

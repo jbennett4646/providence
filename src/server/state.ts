@@ -2,7 +2,7 @@ import "server-only";
 import { and, desc, eq } from "drizzle-orm";
 import { getDb } from "@/db/client";
 import type { HouseholdSnapshot } from "@/db/households";
-import { attendanceDays, checkins, itemRecords, printedDocs, streakDays, teachingEntries } from "@/db/schema";
+import { attendanceDays, checkins, guideSessions, itemRecords, printedDocs, streakDays, teachingEntries, testRecords } from "@/db/schema";
 import { buildCalendar, type SchoolCalendar } from "@/lib/domain/calendar";
 import { DEFAULT_MINUTES_PER_DAY, DEFAULT_REQUIRED_DAYS, stateRules, type StateRules } from "@/lib/domain/compliance";
 import { todayIn, type DateKey } from "@/lib/domain/dates";
@@ -40,6 +40,10 @@ export type ChildRecords = {
   streak: Map<DateKey, StreakStatus>;
   checkins: (typeof checkins.$inferSelect)[];
   printed: Set<string>;
+  /** Practice sessions done from grade guides, e.g. the Grade 3 test readiness plan. */
+  guideSessions: (typeof guideSessions.$inferSelect)[];
+  /** Standardized test dates, by test id. */
+  tests: Map<string, DateKey>;
 };
 
 /** Key for a printed booklet: "3:latin:t2". */
@@ -48,13 +52,15 @@ export const printKey = (grade: number, courseId: string, doc: string) => `${gra
 /** Everything recorded for a child that the screens need. */
 export async function loadChildRecords(childId: string, today: DateKey): Promise<ChildRecords> {
   const db = await getDb();
-  const [records, entries, attendance, streak, log, printed] = await Promise.all([
+  const [records, entries, attendance, streak, log, printed, sessions, tests] = await Promise.all([
     db.select().from(itemRecords).where(eq(itemRecords.childId, childId)),
     db.select().from(teachingEntries).where(and(eq(teachingEntries.childId, childId), eq(teachingEntries.date, today))),
     db.select().from(attendanceDays).where(eq(attendanceDays.childId, childId)).orderBy(attendanceDays.date),
     db.select().from(streakDays).where(eq(streakDays.childId, childId)),
     db.select().from(checkins).where(eq(checkins.childId, childId)).orderBy(desc(checkins.createdAt)).limit(8),
     db.select().from(printedDocs).where(eq(printedDocs.childId, childId)),
+    db.select().from(guideSessions).where(eq(guideSessions.childId, childId)),
+    db.select().from(testRecords).where(eq(testRecords.childId, childId)),
   ]);
   return {
     records,
@@ -63,5 +69,7 @@ export async function loadChildRecords(childId: string, today: DateKey): Promise
     streak: new Map(streak.map((s) => [s.date, s.status])),
     checkins: log,
     printed: new Set(printed.map((p) => printKey(p.grade, p.courseId, p.doc))),
+    guideSessions: sessions,
+    tests: new Map(tests.map((r) => [r.testId, r.givenOn])),
   };
 }

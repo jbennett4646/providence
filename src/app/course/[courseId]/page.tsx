@@ -6,6 +6,7 @@ import { KeysProvider, KeysSwitch } from "@/components/manual/Keys";
 import { PrintLink } from "@/components/teaching/PrintLink";
 import { cx, ui } from "@/components/ui/Controls";
 import type { Block, Course, Section } from "@/lib/content/schema";
+import { GUIDES } from "@/lib/content/guide";
 import { getCourse, getCourseIndex, getWeek } from "@/lib/content/load";
 import { isGateWeek, termOfWeek } from "@/lib/content/year";
 import { isDailySimple, isSplit, itemBlocks, itemBlocksWithKeys, itemKey, itemTitle, missingQueueKeys, routineItem, trackOf } from "@/lib/domain/course";
@@ -121,6 +122,11 @@ export default async function CoursePage({ params, searchParams }: { params: Pro
               {index.map((c) => (
                 <Link key={c.id} href={`/course/${c.id}`} className={cx(ui.pill, styles.pickerPill, c.id === course.id && ui.pillOn)}>
                   {getCourse(course.grade, c.id)?.course ?? c.course}
+                </Link>
+              ))}
+              {(GUIDES[course.grade] ?? []).map((g) => (
+                <Link key={g.id} href={`/guides/grade-${course.grade}/${g.id}`} className={cx(ui.pill, styles.pickerPill, styles.guidePill)}>
+                  {g.title} · guide
                 </Link>
               ))}
             </div>

@@ -14,6 +14,8 @@ export type StateRules = {
   minutesPerDay: number;
   subjects: RequiredSubject[];
   forms: { id: string; name: string; due: string }[];
+  /** A standardized test in some grades, whose results the family keeps. */
+  testing?: { grades: number[]; summary: string; detail: string };
 };
 
 export const GEORGIA: StateRules = {
@@ -33,7 +35,17 @@ export const GEORGIA: StateRules = {
     { id: "declaration", name: "Declaration of Intent", due: "Within 30 days of starting, then by September 1 each year" },
     { id: "annual-report", name: "Annual progress report", due: "Each year; the family keeps it" },
   ],
+  testing: {
+    grades: [3, 6, 9, 12],
+    summary: "A national standardized test at the end of Grades 3, 6, 9 and 12. The family keeps the results; they aren’t sent in.",
+    detail: "Every three years, beginning at the end of Grade 3, given in consultation with someone trained to give and interpret such tests.",
+  },
 };
+
+/** Whether the state asks for a standardized test at the end of this grade. */
+export function isTestingGrade(rules: StateRules | null, grade: number): boolean {
+  return !!rules?.testing?.grades.includes(grade);
+}
 
 const STATES: Record<string, StateRules> = { GA: GEORGIA };
 

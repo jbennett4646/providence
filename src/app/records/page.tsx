@@ -7,7 +7,10 @@ import { termOfWeek } from "@/lib/content/year";
 import { dayMinutes, summarize } from "@/lib/domain/attendance";
 import { itemKey, itemTitle } from "@/lib/domain/course";
 import { addDays, fmtDayMonth, fmtLong, weekStart, WEEKDAYS } from "@/lib/domain/dates";
+import { isTestingGrade } from "@/lib/domain/compliance";
 import { gradeLabel, overallStanding, progymStage } from "@/lib/domain/progress";
+import { READINESS_GRADE, READINESS_TEST } from "@/lib/domain/readiness";
+import { GUIDE_HREF } from "@/server/readiness";
 import { requireHousehold, selectedChild } from "@/server/session";
 import { householdContext, loadChildRecords } from "@/server/state";
 import { childProgress, isScored, liveCourses } from "@/server/views";
@@ -213,6 +216,27 @@ export default async function RecordsPage({ searchParams }: { searchParams: Prom
                       ))}
                     </div>
                   ))}
+                  {rules.testing && (
+                    <div className={styles.subject}>
+                      <div className={styles.subjectName}>Standardized test</div>
+                      <div className={styles.subjectCourse}>{rules.testing.summary}</div>
+                      {isTestingGrade(rules, child.grade) && (
+                        <div className={styles.subjectCourse}>
+                          {child.grade === READINESS_GRADE ? (
+                            rec.tests.get(READINESS_TEST) ? (
+                              `${child.name}’s Grade 3 test: given ${fmtLong(rec.tests.get(READINESS_TEST)!)}. Keep the score report with the portfolio.`
+                            ) : (
+                              <>
+                                {child.name}’s Grade 3 test comes at the end of the year. <Link href={GUIDE_HREF}>The Grade 3 guide</Link> has a two-week readiness plan.
+                              </>
+                            )
+                          ) : (
+                            `${child.name} is in a testing year: ${gradeLabel(child.grade)}.`
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )}
                   <div className={styles.boxSub}>Latin, Bible, Fine Arts, PE and Virtue Formation go beyond the requirement.</div>
                 </div>
               )}

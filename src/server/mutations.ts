@@ -5,6 +5,7 @@ import { isGateWeek, termOfWeek } from "@/lib/content/year";
 import { defaultBreaks, MON_FRI, MON_SAT } from "@/lib/domain/calendar";
 import { masteryInfo, minutesOf, routineItem, usualDayMinutes, type GateInput } from "@/lib/domain/course";
 import { isDateKey, type DateKey } from "@/lib/domain/dates";
+import { READINESS_GRADE, READINESS_GUIDE, READINESS_MINUTES, sessionSlot } from "@/lib/domain/readiness";
 import { recordGate as gateTransition, recordItem as itemTransition } from "@/lib/domain/transitions";
 import type { Db } from "@/db/client";
 import {
@@ -14,12 +15,14 @@ import {
   children,
   enrollments,
   gates,
+  guideSessions,
   holidayTeach,
   households,
   itemRecords,
   printedDocs,
   streakDays,
   teachingEntries,
+  testRecords,
   type ExtraActivity,
 } from "@/db/schema";
 
@@ -190,7 +193,8 @@ async function liveEnrollments(db: Conn, childId: string) {
 
 /**
  * Bring today's attendance and streak in line with what's recorded: the
- * routine minutes are the routine times of the items done today, and the
+ * routine minutes are the routine times of the items (and guide practice
+ * sessions) done today, and the
  * day counts toward the streak once every daily course has its daily core
  * recorded (or has nothing left this week).
  */
@@ -204,10 +208,15 @@ async function syncDay(db: Conn, child: ChildRef, today: DateKey) {
       const c = getCourse(r.grade, r.courseId);
       return a + (c ? minutesOf(routineItem(c, { track: r.track, key: r.itemKey })?.time) : 0);
     }, 0);
+    const practice = await db
+      .select()
+      .from(guideSessions)
+      .where(and(eq(guideSessions.childId, child.id), eq(guideSessions.doneOn, today)));
+    const mins = routine + practice.length * READINESS_MINUTES;
     await db
       .insert(attendanceDays)
-      .values({ childId: child.id, date: today, routineMins: routine })
-      .onConflictDoUpdate({ target: [attendanceDays.childId, attendanceDays.date], set: { routineMins: routine } });
+      .values({ childId: child.id, date: today, routineMins: mins })
+      .onConflictDoUpdate({ target: [attendanceDays.childId, attendanceDays.date], set: { routineMins: mins } });
   }
 
   const live = await liveEnrollments(db, child.id);
@@ -347,12 +356,67 @@ export async function removeExtra(db: Db, childId: string, today: DateKey, index
 }
 
 /** Paper mode: "We did today's routine from the booklets" counts a usual day's routine time. */
-export async function togglePaperRoutine(db: Db, child: ChildRef, today: DateKey) {
+/** `practiceMins`: the day's guide practice on paper (the readiness plan in weeks 34–35), counted with the routine. */
+export async function togglePaperRoutine(db: Db, child: ChildRef, today: DateKey, practiceMins = 0) {
   const row = await attendanceRow(db, child.id, today);
   const on = !row?.paperRoutine;
   const live = await liveEnrollments(db, child.id);
   const usual = Math.round(live.filter((e) => e.pos <= 36).reduce((a, e) => a + usualDayMinutes(getCourse(e.grade, e.courseId)!), 0));
-  await saveAttendance(db, child.id, today, { paperRoutine: on, routineMins: on ? usual : 0 });
+  await saveAttendance(db, child.id, today, { paperRoutine: on, routineMins: on ? usual + practiceMins : 0 });
+}
+
+// ---------------------------------------------------------------------------
+// Grade 3 test readiness: practice sessions and the test date
+
+const sessionWhere = (childId: string, session: number) =>
+  and(
+    eq(guideSessions.childId, childId),
+    eq(guideSessions.grade, READINESS_GRADE),
+    eq(guideSessions.guideId, READINESS_GUIDE),
+    eq(guideSessions.session, session),
+  );
+
+function checkSession(session: number) {
+  if (!Number.isInteger(session) || session < 1 || session > 10) throw new Error(`No practice session ${session}`);
+}
+
+export async function recordReadiness(db: Db, child: ChildRef, today: DateKey, session: number) {
+  checkSession(session);
+  await db
+    .insert(guideSessions)
+    .values({ childId: child.id, grade: READINESS_GRADE, guideId: READINESS_GUIDE, session, doneOn: today })
+    .onConflictDoNothing();
+  await syncDay(db, child, today);
+}
+
+/** Undo a session recorded today. Earlier days' sessions stay in the record. */
+export async function undoReadiness(db: Db, child: ChildRef, today: DateKey, session: number) {
+  checkSession(session);
+  await db.delete(guideSessions).where(and(sessionWhere(child.id, session), eq(guideSessions.doneOn, today)));
+  await syncDay(db, child, today);
+}
+
+/** Paper check-in: the week's five sessions are done. */
+export async function readinessWeekDone(db: Db, childId: string, today: DateKey, week: 34 | 35) {
+  const sessions = Array.from({ length: 10 }, (_, i) => i + 1).filter((s) => sessionSlot(s).week === week);
+  await db
+    .insert(guideSessions)
+    .values(sessions.map((session) => ({ childId, grade: READINESS_GRADE, guideId: READINESS_GUIDE, session, doneOn: today })))
+    .onConflictDoNothing();
+}
+
+/** Record (or, with null, clear) the day a standardized test was given. */
+export async function setTestDate(db: Db, childId: string, testId: string, givenOn: DateKey | null) {
+  const where = and(eq(testRecords.childId, childId), eq(testRecords.testId, testId));
+  if (!givenOn) {
+    await db.delete(testRecords).where(where);
+    return;
+  }
+  if (!isDateKey(givenOn)) throw new Error("Not a date");
+  await db
+    .insert(testRecords)
+    .values({ childId, testId, givenOn })
+    .onConflictDoUpdate({ target: [testRecords.childId, testRecords.testId], set: { givenOn, updatedAt: new Date() } });
 }
 
 // ---------------------------------------------------------------------------

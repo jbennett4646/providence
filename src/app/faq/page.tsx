@@ -50,6 +50,14 @@ const groups: Group[] = [
         q: "What if we travel or miss days?",
         a: "Add the break to your calendar and the plan moves with you. Only days you actually teach count toward your 180.",
       },
+      {
+        q: "Do you give tests?",
+        a: "Not in the usual sense. Children narrate, recite and answer short written checks. Each term ends with a short scored check against the manual’s mastery line. The record shows mastery and completion, never letter grades.",
+      },
+      {
+        q: "Why is the format different from how we teach?",
+        a: "A standardized test asks the same knowledge in a different shape: choosing among four answers, filling in bubbles, working against a clock. A child who knows the material can still lose points to the format. Two short weeks of practice remove that obstacle; it’s teaching one more kind of task.",
+      },
     ],
   },
   {
@@ -62,6 +70,14 @@ const groups: Group[] = [
       {
         q: "Who handles the Declaration of Intent and the annual report?",
         a: "We do nearly all of it. We prepare your Declaration of Intent and annual progress report, filled in and ready to sign. You sign them, file the declaration (online, or by mail with your own stamp), and keep the progress report with your records. The Declaration is due within 30 days of starting and by September 1 each year after.",
+      },
+      {
+        q: "What about standardized tests?",
+        a: "Georgia requires a national standardized test at the end of Grades 3, 6, 9 and 12. Families keep the results; they aren’t sent in. For Grade 3 we recommend one test, the California Achievement Test, given by the parent at home. It’s a check-up, low-stakes, and our Grade 3 guide includes a two-week readiness plan.",
+      },
+      {
+        q: "Do we still have to send in attendance reports?",
+        a: "No. Georgia families once had to send attendance reports to their local school system, and many parents remember doing it. That requirement ended in 2013. We don’t mail attendance reports, because none are due, but we do keep them for you: every school day and its hours of instruction are in your record, ready to print whenever you want them.",
       },
       {
         q: "Why no letter grades?",

@@ -51,6 +51,15 @@ Each prototype `screen` is a route:
 
 `src/server/forms/` builds the Declaration of Intent and the annual progress report from the record (`model.ts`) and renders them server-side with `@react-pdf/renderer` (`pdf.tsx`), embedding EB Garamond and Libre Franklin from `assets/fonts/` (SIL Open Font License; the licence files are alongside). The Georgia rules (due dates, the 12-month school year, ages, what the declaration must list) are in `src/lib/domain/forms.ts`. Other states get the progress report organised by Georgia's five subjects until their own rules are added to `compliance.ts`.
 
+## Grade guides
+
+A guide is reading for the parent that sits beside a grade's courses without being one: it has no position, no floor rule and no term check. Each is a JSON file in `content/grade-N/guides/`, validated by `src/lib/content/guide.ts` (paragraphs with `**bold**` and `*italic*`, lists, tables, the two-week plan, question groups, the answer sheet and key) and listed in `GUIDES` there. The first is Grade 3 Test Readiness (`test-readiness.json`), converted from the academy's Word document with only "Providence Academy" changed to "Providence Home Academy".
+
+- `/guides/grade-3/test-readiness` shows it to signed-in families, with the answer key behind the same switch as the manuals, and it is linked from each Grade 3 course's manual picker.
+- `/api/guides/grade-3/test-readiness` is the printable booklet (`src/server/guides/pdf.tsx`). EB Garamond has no ⅕, so every vulgar fraction is set in a small subset of DejaVu Serif (`assets/fonts/DejaVuSerif-Fractions.ttf`, licence alongside). Keep `lineHeight` off the `Page` style: react-pdf re-multiplies an inherited line height on every page for the fixed page-number footer until the number overflows.
+- On Teaching, the plan follows the **school calendar**, not course positions (`src/lib/domain/readiness.ts`): the calendar's planned days split into 36 school weeks, a reminder to order the test from week 30, one 15–20 minute session a day in weeks 34–35 (ten in all, taken in order; each adds 18 minutes to the day's attendance), and the test in week 36. On paper, the check-in has a "Week done" row and the usual day counts the practice. Sessions are in `guide_sessions`; the date the test was given (only the date, never scores) is in `test_records`.
+- Georgia's testing rule (a national standardized test at the end of Grades 3, 6, 9 and 12, results kept by the family) is `GEORGIA.testing` in `compliance.ts`, shown in the Records summary, on the State forms page, on the dashboard's Reporting card and on the annual progress report.
+
 ## Accounts and billing
 
 - One parent account per household; from Grade 6 a child can have a student login (Settings), which sees only `/student`.

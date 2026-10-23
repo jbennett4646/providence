@@ -21,6 +21,10 @@
   padding: 6px 12px;
   font-size: 12px;
 }
+.guidePill {
+  border-style: dashed;
+  border-color: var(--pa-accent);
+}
 .titleRow {
   display: flex;
   align-items: flex-end;
