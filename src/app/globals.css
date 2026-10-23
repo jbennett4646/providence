@@ -1,0 +1,135 @@
+/*
+ * Design tokens, extracted from the prototype (design_handoff_providence_home_academy).
+ * Square corners and 1px hairlines throughout; no shadows.
+ */
+:root {
+  /* Ink and dark panels */
+  --pa-ink: #1f1b15;
+  --pa-panel: #26221b;
+  --pa-panel-hover: #2a251d;
+
+  /* Light surfaces */
+  --pa-parchment: #efe7d7;
+  --pa-band: #f4eddf;
+  --pa-card: #fbf7ef;
+  --pa-teaching-bg: #e6dcc6;
+
+  /* Rules and borders, light to dark */
+  --pa-rule-1: #e5dac4;
+  --pa-rule-2: #dbcfb6;
+  --pa-rule-3: #d2c4a8;
+  --pa-rule-4: #cfc1a4;
+  --pa-rule-5: #c9bb9e;
+  --pa-row-divider: #ede4d2;
+
+  /* Brand accents */
+  --pa-accent: #a87c3d;
+  --pa-accent-hi: #c1934d;
+  --pa-deep: #7b2d26;
+  --pa-deep-hi: #5e211c;
+  --pa-green: #33503f;
+  --pa-green-border: #a9beae;
+
+  /* Text greys, dark to light */
+  --pa-text-1: #3e382e;
+  --pa-text-2: #4a4337;
+  --pa-text-3: #5e5648;
+  --pa-text-4: #6b6154;
+  --pa-text-5: #7a7161;
+  --pa-text-6: #8a8071;
+  --pa-text-7: #8c8172;
+
+  /* Text on dark */
+  --pa-on-dark: #efe7d7;
+  --pa-on-dark-muted: #bfb49e;
+  --pa-on-dark-soft: #e9dec6;
+  --pa-on-dark-rule: rgba(233, 222, 198, 0.12);
+
+  /* Type (font families are injected by next/font in the root layout) */
+  --pa-font-display: var(--font-garamond), "EB Garamond", Georgia, serif;
+  --pa-font-ui: var(--font-franklin), "Libre Franklin", system-ui, sans-serif;
+
+  /* Layout */
+  --pa-topbar-h: 46px;
+  --pa-sidebar-w: 238px;
+  --pa-max-marketing: 1180px;
+  --pa-max-app: 1240px;
+  --pa-max-faq: 1000px;
+  --pa-gutter: 40px;
+}
+
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
+body {
+  margin: 0;
+  background: var(--pa-parchment);
+  color: var(--pa-ink);
+  font-family: var(--pa-font-ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--pa-deep);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--pa-deep-hi);
+}
+
+::selection {
+  background: #e3d3ae;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--pa-font-display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+@media screen {
+  [data-printonly] {
+    display: none !important;
+  }
+}
+
+@media print {
+  @page {
+    size: letter portrait;
+    margin: 0.55in;
+  }
+  html,
+  body {
+    background: #fff !important;
+  }
+  [data-noprint] {
+    display: none !important;
+  }
+  [data-print-page] {
+    background: #fff !important;
+    max-width: none !important;
+    padding: 0 !important;
+    min-height: 0 !important;
+  }
+  [data-print-plain] {
+    background: #fff !important;
+    border: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  [data-print-keep] {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

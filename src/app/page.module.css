@@ -1,0 +1,40 @@
+.hero {
+  background: var(--pa-ink);
+  color: var(--pa-on-dark);
+}
+
+.wrap {
+  max-width: var(--pa-max-marketing);
+  margin: 0 auto;
+  padding: 0 var(--pa-gutter);
+}
+
+.body {
+  padding: 86px 0 96px;
+  max-width: 720px;
+}
+
+.kicker {
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--pa-accent);
+  margin-bottom: 26px;
+}
+
+.headline {
+  font-size: 54px;
+  line-height: 1.05;
+  margin: 0 0 26px;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.lede {
+  font-size: 16.5px;
+  line-height: 1.66;
+  color: var(--pa-on-dark-muted);
+  margin: 0;
+  max-width: 520px;
+  text-wrap: pretty;
+}

@@ -1,0 +1,16 @@
+.screen {
+  min-height: calc(100vh - var(--pa-topbar-h));
+}
+
+.parchment {
+  background: var(--pa-parchment);
+}
+
+.teaching {
+  background: var(--pa-teaching-bg);
+}
+
+.dark {
+  background: var(--pa-ink);
+  color: var(--pa-on-dark);
+}
