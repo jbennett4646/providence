@@ -95,7 +95,8 @@ export function standing(course: CourseRef, grade: number, week: number, gates: 
   if (!course.scored) return termsDone ? `${termsDone} of 6 terms` : "—";
   if (!termsDone) return "—";
   const last = gates.find((g) => g.courseId === course.id && g.grade === grade && g.term === termsDone);
-  if (!last) return "Mastered";
+  // Terms before the one a child was placed in have no check on record.
+  if (!last) return "Placed";
   return last.pass ? `Mastered · ${last.score}/${last.of}` : "Review week";
 }
 

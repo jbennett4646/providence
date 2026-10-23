@@ -3,15 +3,22 @@ import Link from "next/link";
 import { cx, ui } from "@/components/ui/Controls";
 import { MON_SAT } from "@/lib/domain/calendar";
 import { gradeLabel } from "@/lib/domain/grades";
-import { requireHousehold } from "@/server/session";
+import { getDb } from "@/db/client";
+import { PLANS, subscriptionOpen } from "@/lib/domain/billing";
+import { STUDENT_GRADE, studentLogins } from "@/server/auth/accounts";
+import { billingEnabled } from "@/server/billing/stripe";
+import { requireHousehold, requireParent } from "@/server/session";
 import { SchoolDaysChoice } from "../calendar/client";
-import { AddChildForm, ChildForm, HouseholdForm } from "./client";
+import { AddChildForm, ChildForm, HouseholdForm, PasswordForm, StudentLoginForm } from "./client";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Settings" };
 
 export default async function SettingsPage() {
   const h = await requireHousehold();
+  const { user } = await requireParent();
+  const logins = await studentLogins(await getDb(), h.id);
+  const older = h.children.filter((c) => c.grade >= STUDENT_GRADE);
   const mf = [...h.schoolDays].sort().join(",") !== MON_SAT.join(",");
   return (
     <main data-screen-label="Settings" className={styles.screen}>
@@ -50,11 +57,35 @@ export default async function SettingsPage() {
         </section>
 
         <section className={cx(ui.card, styles.box)}>
+          <div className={styles.boxTitle}>Student logins</div>
+          <div className={styles.boxSub}>From Grade {STUDENT_GRADE}, a child can sign in with their own username to the student module. Younger children have no login; you see everything.</div>
+          {older.length === 0 && <div className={styles.boxSub}>No children in Grade {STUDENT_GRADE} or above yet.</div>}
+          {older.map((c) => (
+            <StudentLoginForm key={c.id} childId={c.id} name={c.name} username={logins.find((l) => l.childId === c.id)?.username ?? null} />
+          ))}
+        </section>
+
+        <section className={cx(ui.card, styles.box)}>
+          <div className={styles.boxTitle}>Your account</div>
+          <div className={styles.boxSub}>Signed in as {user.email}.</div>
+          <PasswordForm />
+        </section>
+
+        <section className={cx(ui.card, styles.box)}>
           <div className={styles.boxTitle}>Plan and billing</div>
           <div className={styles.boxSub}>
-            Household plan, $100 a month, for any number of children. Parish and co-op plan, $500 a month, for several families. Cancel in any month. Subscriptions
-            open with sign-in; until then everything here is free to use.
+            {!billingEnabled()
+              ? "Payments aren’t switched on yet, so everything is open and nothing is charged."
+              : subscriptionOpen(h.subscriptionStatus) && h.plan
+                ? `${PLANS[h.plan].name}, $${PLANS[h.plan].price} a month.${h.cancelAtPeriodEnd ? " Cancelled at the end of this period." : ""}`
+                : h.coopId
+                  ? "Covered by your parish or co-op."
+                  : "No plan yet."}{" "}
+            Per household, not per child. Cancel in any month.
           </div>
+          <Link href="/billing" className={ui.link}>
+            Open plan and billing
+          </Link>
         </section>
       </div>
     </main>

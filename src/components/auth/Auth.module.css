@@ -1,0 +1,78 @@
+.wrap {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 56px var(--pa-gutter) 64px;
+}
+.wide {
+  max-width: 820px;
+}
+.crest {
+  margin-bottom: 18px;
+}
+.kicker {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--pa-accent);
+  margin-bottom: 8px;
+}
+.title {
+  font-size: 38px;
+  margin: 0 0 10px;
+}
+.lede {
+  font-size: 14.5px;
+  color: var(--pa-text-3);
+  margin: 0 0 24px;
+  line-height: 1.6;
+  max-width: 58ch;
+}
+.form {
+  padding: 26px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.label {
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #9c907c;
+}
+.hint {
+  font-size: 12px;
+  color: var(--pa-text-5);
+  line-height: 1.5;
+}
+.error {
+  font-size: 13px;
+  color: var(--pa-deep);
+  margin: 0;
+}
+.ok {
+  font-size: 13px;
+  color: var(--pa-green);
+  margin: 0;
+  line-height: 1.55;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.foot {
+  font-size: 13px;
+  color: var(--pa-text-4);
+  margin-top: 18px;
+}

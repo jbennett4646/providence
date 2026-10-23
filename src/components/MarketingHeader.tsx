@@ -20,7 +20,7 @@ export function MarketingHeader() {
         <Link href="/#tuition" className={styles.link}>
           Tuition
         </Link>
-        <Link href="/start" className={styles.link}>
+        <Link href="/sign-in" className={styles.link}>
           Sign in
         </Link>
         <Link href="/start" className={styles.cta}>

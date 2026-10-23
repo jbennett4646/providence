@@ -1,0 +1,120 @@
+.wrap {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 28px var(--pa-gutter) 64px;
+}
+.title {
+  font-size: 40px;
+  margin: 0 0 8px;
+}
+.lede {
+  font-size: 14.5px;
+  color: var(--pa-text-3);
+  margin: 0 0 24px;
+}
+.note {
+  font-size: 13.5px;
+  color: var(--pa-green);
+  margin: 0 0 18px;
+}
+.box {
+  padding: 22px 26px;
+  margin-bottom: 20px;
+}
+.boxHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+.boxTitle {
+  font-family: var(--pa-font-display);
+  font-size: 22px;
+  display: block;
+  margin-bottom: 6px;
+}
+.metaSmall {
+  font-size: 12px;
+  color: var(--pa-text-6);
+}
+.muted {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--pa-text-3);
+  margin: 0 0 14px;
+}
+.badge {
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+}
+.badgeOk {
+  color: var(--pa-green);
+  border: 1px solid var(--pa-green-border);
+}
+.badgeWarn {
+  color: var(--pa-deep);
+  border: 1px solid #d8b3ab;
+}
+.code {
+  font-family: var(--pa-font-ui);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--pa-ink);
+  background: var(--pa-band);
+  border: 1px solid var(--pa-rule-2);
+  padding: 2px 8px;
+}
+.plans {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 20px;
+}
+.plan {
+  padding: 24px 24px 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.planSoon {
+  border: 1px dashed var(--pa-rule-5);
+  color: var(--pa-text-6);
+}
+.planName {
+  font-family: var(--pa-font-display);
+  font-size: 21px;
+  margin-bottom: 10px;
+}
+.planPrice {
+  font-family: var(--pa-font-display);
+  font-size: 38px;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.planSoon .planPrice {
+  font-size: 22px;
+}
+.planPrice span {
+  font-family: var(--pa-font-ui);
+  font-size: 13px;
+  color: var(--pa-text-5);
+  margin-left: 4px;
+}
+.plan > :last-child {
+  margin-top: auto;
+}
+.join {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.join input {
+  width: 200px;
+}
+.error {
+  font-size: 12.5px;
+  color: var(--pa-deep);
+}

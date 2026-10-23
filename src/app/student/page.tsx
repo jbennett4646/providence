@@ -2,11 +2,37 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Screen } from "@/components/Screen";
 import { reserved } from "@/components/marketing/content";
+import { gradeLabel } from "@/lib/domain/grades";
+import { getSession } from "@/server/session";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Student module" };
 
-export default function StudentPage() {
+export default async function StudentPage() {
+  const s = await getSession();
+  const me = s?.user.role === "student" ? s.household.children.find((c) => c.id === s.user.childId) : null;
+  if (me) {
+    // A signed-in student (Grade 6 and up).
+    return (
+      <Screen label="Student module" tone="dark">
+        <div className={styles.stage}>
+          <div className={styles.inner}>
+            <div className={styles.kicker}>
+              The student module · {gradeLabel(me.grade)}
+            </div>
+            <h1 className={styles.title}>Welcome, {me.name}.</h1>
+            <p className={styles.lead}>
+              This is where your own work will live: your courses for the week, your memory work and your commonplace book.
+            </p>
+            <p className={styles.body}>
+              {gradeLabel(me.grade)} courses aren&apos;t loaded yet. Until they are, your parent keeps your record, and
+              everything they log is waiting here for you.
+            </p>
+          </div>
+        </div>
+      </Screen>
+    );
+  }
   return (
     <Screen label="Student module (locked)" tone="dark">
       <div className={styles.stage}>

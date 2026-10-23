@@ -2,6 +2,7 @@
 
 import { useActionState, useState, useTransition } from "react";
 import { addChild, removeChild, setMode, updateChild, updateHousehold, type FormState } from "@/app/actions";
+import { changePassword, removeStudentLogin, setStudentLogin } from "@/app/auth-actions";
 import { cx, ui } from "@/components/ui/Controls";
 import { gradeLabel } from "@/lib/domain/grades";
 import styles from "./page.module.css";
@@ -127,6 +128,56 @@ export function AddChildForm() {
         <button type="submit" className={cx(ui.btn, ui.dark)} disabled={pending}>
           Add the child
         </button>
+        <Saved state={s} />
+      </div>
+    </form>
+  );
+}
+
+export function PasswordForm() {
+  const [s, action, pending] = useActionState<FormState, FormData>(changePassword, {});
+  return (
+    <form action={action} className={styles.form}>
+      <label className={styles.field}>
+        <span className={styles.label}>Current password</span>
+        <input className={ui.input} type="password" name="current" autoComplete="current-password" required />
+      </label>
+      <label className={styles.field}>
+        <span className={styles.label}>New password</span>
+        <input className={ui.input} type="password" name="next" autoComplete="new-password" minLength={10} required />
+      </label>
+      <div className={styles.formEnd}>
+        <button type="submit" className={cx(ui.btn, ui.outline)} disabled={pending}>
+          Change password
+        </button>
+        <Saved state={s} />
+      </div>
+    </form>
+  );
+}
+
+export function StudentLoginForm({ childId, name, username }: { childId: string; name: string; username: string | null }) {
+  const [s, action, pending] = useActionState<FormState, FormData>(setStudentLogin.bind(null, childId), {});
+  const [busy, start] = useTransition();
+  return (
+    <form action={action} className={cx(styles.form, styles.child)}>
+      <label className={styles.field}>
+        <span className={styles.label}>{name} · username</span>
+        <input className={ui.input} name="username" defaultValue={username ?? ""} maxLength={32} required autoComplete="off" />
+      </label>
+      <label className={styles.field}>
+        <span className={styles.label}>{username ? "New password" : "Password"}</span>
+        <input className={ui.input} type="password" name="password" minLength={10} required autoComplete="new-password" />
+      </label>
+      <div className={styles.formEnd}>
+        <button type="submit" className={cx(ui.btn, ui.outline)} disabled={pending}>
+          {username ? "Update login" : "Create login"}
+        </button>
+        {username && (
+          <button type="button" className={ui.quiet} disabled={busy} onClick={() => window.confirm(`Remove ${name}'s login?`) && start(() => removeStudentLogin(childId))}>
+            Remove login
+          </button>
+        )}
         <Saved state={s} />
       </div>
     </form>

@@ -14,6 +14,7 @@ import {
   text,
   timestamp,
   uuid,
+  type AnyPgColumn,
 } from "drizzle-orm/pg-core";
 
 /*
@@ -31,6 +32,7 @@ export const teachingMode = pgEnum("teaching_mode", ["screen", "paper"]);
 export const trackKind = pgEnum("track_kind", ["daily", "queue", "weekly"]);
 export const streakStatus = pgEnum("streak_status", ["done", "sick", "travel"]);
 export const itemOutcome = pgEnum("item_outcome", ["well"]);
+export const userRole = pgEnum("user_role", ["parent", "student"]);
 
 const createdAt = () => timestamp("created_at", { withTimezone: true }).notNull().defaultNow();
 
@@ -70,7 +72,98 @@ export const households = pgTable("households", {
   timezone: text("timezone").notNull().default("America/New_York"),
   /** Small per-household UI preferences, e.g. { weekNoteSeen: true }. */
   prefs: jsonb("prefs").$type<Record<string, unknown>>().notNull().default({}),
+  /** Set when sign-up's onboarding steps are finished. */
+  onboardedAt: timestamp("onboarded_at", { withTimezone: true }),
+  // Billing (Stripe). One subscription covers the whole household.
+  stripeCustomerId: text("stripe_customer_id").unique(),
+  subscriptionId: text("subscription_id").unique(),
+  /** Stripe's subscription status: active, trialing, past_due, canceled, … */
+  subscriptionStatus: text("subscription_status"),
+  currentPeriodEnd: timestamp("current_period_end", { withTimezone: true }),
+  cancelAtPeriodEnd: boolean("cancel_at_period_end").notNull().default(false),
+  /** A parish or co-op whose plan covers this household. */
+  coopId: uuid("coop_id").references((): AnyPgColumn => coops.id, { onDelete: "set null" }),
   createdAt: createdAt(),
+});
+
+/**
+ * A parish, neighbourhood or co-op on the parish plan. The owning household
+ * holds the subscription; up to `maxHouseholds` families join with the
+ * invite code and are covered by it.
+ */
+export const coops = pgTable("coops", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: text("name").notNull(),
+  ownerHouseholdId: uuid("owner_household_id")
+    .notNull()
+    .unique()
+    .references((): AnyPgColumn => households.id, { onDelete: "cascade" }),
+  inviteCode: text("invite_code").notNull().unique(),
+  maxHouseholds: smallint("max_households").notNull().default(25),
+  createdAt: createdAt(),
+});
+
+// ---------------------------------------------------------------------------
+// Accounts
+
+/**
+ * One parent account per household (signing in with email), and from
+ * Grade 6 a student login per child (signing in with a username).
+ */
+export const users = pgTable(
+  "users",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    role: userRole("role").notNull(),
+    /** Parents sign in with their email, stored lower-cased. */
+    email: text("email").unique(),
+    /** Students sign in with a username their parent chose, stored lower-cased. */
+    username: text("username").unique(),
+    passwordHash: text("password_hash").notNull(),
+    householdId: uuid("household_id")
+      .notNull()
+      .references(() => households.id, { onDelete: "cascade" }),
+    childId: uuid("child_id").references(() => children.id, { onDelete: "cascade" }),
+    lastSignInAt: timestamp("last_sign_in_at", { withTimezone: true }),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    index("users_household_idx").on(t.householdId),
+    check("users_parent_email", sql`${t.role} <> 'parent' or ${t.email} is not null`),
+    check("users_student_login", sql`${t.role} <> 'student' or (${t.username} is not null and ${t.childId} is not null)`),
+  ],
+);
+
+/** Signed-in sessions. The cookie holds a random token; only its SHA-256 is stored. */
+export const sessions = pgTable(
+  "sessions",
+  {
+    tokenHash: text("token_hash").primaryKey(),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+    createdAt: createdAt(),
+  },
+  (t) => [index("sessions_user_idx").on(t.userId)],
+);
+
+/** One-time password-reset links, stored hashed like sessions. */
+export const passwordResets = pgTable("password_resets", {
+  tokenHash: text("token_hash").primaryKey(),
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+  usedAt: timestamp("used_at", { withTimezone: true }),
+  createdAt: createdAt(),
+});
+
+/** Stripe webhook events already handled, so a redelivery is applied once. */
+export const stripeEvents = pgTable("stripe_events", {
+  id: text("id").primaryKey(),
+  type: text("type").notNull(),
+  processedAt: timestamp("processed_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 /** Family breaks. The plan shifts around them; break days don't count toward 180. */

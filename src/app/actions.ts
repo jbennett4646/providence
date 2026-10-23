@@ -3,13 +3,11 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { getDb } from "@/db/client";
-import { addChild as addChildDb, createHousehold, setElective } from "@/db/households";
-import { defaultBreaks } from "@/lib/domain/calendar";
+import { addChild as addChildDb, setElective } from "@/db/households";
 import { EXTRA_OPTIONS } from "@/lib/domain/attendance";
 import { isDateKey, todayIn } from "@/lib/domain/dates";
-import { calendarBreaks } from "@/db/schema";
 import * as m from "@/server/mutations";
-import { currentHousehold, requireOwnChild, setChildCookie, setHouseholdCookie } from "@/server/session";
+import { currentHousehold, requireOwnChild, setChildCookie } from "@/server/session";
 
 /*
  * Server actions behind every button. Each checks the household (and child)
@@ -20,7 +18,7 @@ const refresh = () => revalidatePath("/", "layout");
 
 async function household() {
   const h = await currentHousehold();
-  if (!h) redirect("/start");
+  if (!h) redirect("/sign-in");
   return h;
 }
 
@@ -33,33 +31,6 @@ const GRADES = new Set([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
 
 function str(form: FormData, key: string, max = 80): string {
   return String(form.get(key) ?? "").trim().slice(0, max);
-}
-
-// ---------------------------------------------------------------------------
-// Setup
-
-export type SetupState = { error?: string };
-
-export async function setUpHousehold(_prev: SetupState, form: FormData): Promise<SetupState> {
-  const family = str(form, "household");
-  const childName = str(form, "child", 40);
-  const grade = Number(form.get("grade"));
-  const start = str(form, "start", 10);
-  const mode = form.get("mode") === "paper" ? "paper" : "screen";
-  const priorDays = Math.max(0, Math.min(180, Number(form.get("priorDays") || 0) || 0));
-  if (!family) return { error: "Give the household a name." };
-  if (!childName) return { error: "Add your child's name." };
-  if (!GRADES.has(grade)) return { error: "Choose a grade." };
-  if (!isDateKey(start)) return { error: "Choose the first day of school." };
-
-  const db = await getDb();
-  const h = await createHousehold(db, { name: family, calStart: start });
-  const breaks = defaultBreaks(start);
-  if (breaks.length) await db.insert(calendarBreaks).values(breaks.map((b) => ({ householdId: h.id, ...b })));
-  const child = await addChildDb(db, h.id, { name: childName, grade, mode, priorDays });
-  await setHouseholdCookie(h.id);
-  await setChildCookie(child.id);
-  redirect("/parent");
 }
 
 // ---------------------------------------------------------------------------

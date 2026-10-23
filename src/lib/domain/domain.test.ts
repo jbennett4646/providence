@@ -134,6 +134,7 @@ describe("the floor rule", () => {
     const gates = [{ courseId: "latin", grade: 3, term: 1, score: 18, of: 20, pass: true }];
     expect(standing(courses[0], 3, 9, gates)).toBe("Mastered · 18/20");
     expect(standing(courses[0], 3, 3, gates)).toBe("—");
+    expect(standing(courses[0], 3, 7, [])).toBe("Placed");
     expect(standing(courses[2], 3, 29, [])).toBe("4 of 6 terms");
     expect(overallStanding(gates)).toEqual({ label: "Mastered", note: "every scored term check so far met its mastery line" });
     expect(overallStanding([]).label).toBe("—");

@@ -40,11 +40,24 @@ Without `DATABASE_URL`, development uses an embedded Postgres (PGlite) stored in
 Each prototype `screen` is a route:
 
 - Public: `/` (landing), `/faq`, `/student` (locked until Grade 6).
-- `/start`: set up a household and its first child (name, grade, first day, days taught elsewhere, screen or paper). This replaces the prototype's demo seeds.
+- `/start`: sign-up and onboarding: household and parent account → children and grades → placement (each course's starting term, electives) → first day and days taught elsewhere → screen or paper. This replaces the prototype's demo seeds.
+- `/sign-in`, `/forgot`, `/reset`: parents sign in with email, students (Grade 6+) with a username.
+- `/billing`: plans, Stripe Checkout and the billing portal, and joining a parish or co-op by invite code.
 - `/parent` (dashboard), `/teaching`, `/course/[courseId]` (manuals; `?tab=0` year plan, `?tab=1..6` terms, `&item=glance|refN|wN|afterN`), `/calendar`, `/records` (`?tab=log|portfolio|transcript`), `/settings`.
 - `/print?child=…&docs=3:latin:plan,3:latin:t1`: a booklet laid out for printing, which records the booklets as printed.
 
-Until accounts arrive, the household is remembered by an unguessable id in an httpOnly cookie set on `/start`; the selected child is a second cookie. `src/server/session.ts` is the one place to swap for real sign-in.
+## Accounts and billing
+
+- One parent account per household; from Grade 6 a child can have a student login (Settings), which sees only `/student`.
+- Passwords are hashed with scrypt; sessions are random tokens in an httpOnly cookie, stored hashed (`src/server/auth/`). Password-reset links last two hours and work once. Failed sign-ins are rate-limited per login in memory (per server).
+- Email goes through Resend when `RESEND_API_KEY` is set, otherwise to the server log (`src/server/mail.ts`).
+- Billing is off until `STRIPE_SECRET_KEY` is set; then a household needs an active plan (or its parish's) to open the app. To set it up:
+  1. `STRIPE_SECRET_KEY=sk_test_… npm run stripe:setup` creates the $100 and $500 monthly prices and prints `STRIPE_PRICE_HOUSEHOLD` and `STRIPE_PRICE_PARISH`.
+  2. In Stripe, add a webhook endpoint at `<SITE_URL>/api/stripe/webhook` for `checkout.session.completed` and `customer.subscription.*`, and set `STRIPE_WEBHOOK_SECRET`.
+  3. Turn on the customer portal in Stripe (Settings → Billing → Customer portal) so families can change cards and cancel.
+- The parish plan's household gets an invite code (shown on its billing page); up to 25 households join with it and are covered while that plan is active.
+
+See `.env.example` for every variable.
 
 ## Where the logic lives
 

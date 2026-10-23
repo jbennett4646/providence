@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { EB_Garamond, Libre_Franklin } from "next/font/google";
 import type { ReactNode } from "react";
+import { signOut } from "@/app/auth-actions";
 import { TopNav } from "@/components/TopNav";
+import { getSession } from "@/server/session";
 import "./globals.css";
 
 const garamond = EB_Garamond({
@@ -28,11 +30,15 @@ export const metadata: Metadata = {
     "A classical, parent-led homeschool program. Teach from daily scripts, on screen or on paper, with your home-study records kept for you.",
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const s = await getSession();
+  const account = s
+    ? { label: s.user.role === "parent" ? s.household.name : (s.household.children.find((c) => c.id === s.user.childId)?.name ?? "Student"), role: s.user.role }
+    : null;
   return (
     <html lang="en" className={`${garamond.variable} ${franklin.variable}`}>
       <body>
-        <TopNav />
+        <TopNav account={account} signOut={signOut} />
         {children}
       </body>
     </html>
