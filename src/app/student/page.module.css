@@ -1,0 +1,123 @@
+.stage {
+  min-height: calc(100vh - var(--pa-topbar-h));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 70px var(--pa-gutter);
+}
+
+.inner {
+  max-width: 1000px;
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 0.85fr;
+  gap: 70px;
+  align-items: start;
+}
+
+.kicker {
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--pa-accent);
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 52px;
+  line-height: 1.08;
+  margin: 0 0 24px;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.lead {
+  font-family: var(--pa-font-display);
+  font-size: 21px;
+  line-height: 1.65;
+  color: #d3c7af;
+  margin: 0 0 20px;
+  max-width: 52ch;
+  text-wrap: pretty;
+}
+
+.body {
+  font-size: 15px;
+  line-height: 1.72;
+  color: #a79c88;
+  margin: 0 0 32px;
+  max-width: 56ch;
+  text-wrap: pretty;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  background: var(--pa-on-dark);
+  color: var(--pa-ink);
+  padding: 14px 26px;
+  font-family: var(--pa-font-display);
+  font-size: 17px;
+}
+
+.cta:hover {
+  background: #fff;
+  color: var(--pa-ink);
+}
+
+.kept {
+  border: 1px solid rgba(233, 222, 198, 0.2);
+  padding: 30px 30px 26px;
+}
+
+.keptHead {
+  font-size: 10.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--pa-text-7);
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(233, 222, 198, 0.14);
+}
+
+.row {
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(233, 222, 198, 0.09);
+}
+
+.rowTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.rowName {
+  font-family: var(--pa-font-display);
+  font-size: 19px;
+  color: var(--pa-on-dark);
+}
+
+.rowCount {
+  font-size: 12px;
+  color: var(--pa-accent);
+  flex: none;
+}
+
+.rowNote {
+  font-size: 12px;
+  color: var(--pa-text-7);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.keptFoot {
+  font-size: 11.5px;
+  color: var(--pa-text-7);
+  line-height: 1.6;
+  padding-top: 16px;
+}

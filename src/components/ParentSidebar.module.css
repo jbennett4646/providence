@@ -1,0 +1,72 @@
+.sidebar {
+  width: var(--pa-sidebar-w);
+  flex: none;
+  background: var(--pa-ink);
+  color: var(--pa-on-dark-muted);
+  padding: 26px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 22px 24px;
+  border-bottom: 1px solid var(--pa-on-dark-rule);
+  font-family: var(--pa-font-display);
+  font-size: 17px;
+  color: var(--pa-on-dark);
+  letter-spacing: 0.03em;
+}
+
+.nav {
+  padding: 18px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  padding: 10px 22px;
+  font-size: 13.5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--pa-on-dark-muted);
+}
+
+.item:hover,
+.active {
+  background: var(--pa-panel-hover);
+  color: var(--pa-on-dark);
+}
+
+.badge {
+  font-size: 11px;
+  color: var(--pa-accent);
+}
+
+.household {
+  margin-top: auto;
+  padding: 20px 22px;
+  border-top: 1px solid var(--pa-on-dark-rule);
+}
+
+.householdKicker {
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pa-text-4);
+  margin-bottom: 8px;
+}
+
+.householdName {
+  font-family: var(--pa-font-display);
+  font-size: 18px;
+  color: var(--pa-on-dark);
+}
+
+.householdMeta {
+  font-size: 11.5px;
+  margin-top: 3px;
+}

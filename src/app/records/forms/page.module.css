@@ -1,0 +1,177 @@
+.screen {
+  min-height: calc(100vh - var(--pa-topbar-h));
+  background: var(--pa-parchment);
+}
+.wrap {
+  max-width: var(--pa-max-marketing);
+  margin: 0 auto;
+  padding: 28px var(--pa-gutter) 64px;
+}
+.title {
+  font-size: 40px;
+  margin: 0 0 8px;
+}
+.lede {
+  font-size: 14.5px;
+  color: var(--pa-text-3);
+  line-height: 1.6;
+  max-width: 72ch;
+  margin: 0 0 26px;
+}
+.cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-width: 0;
+}
+.box {
+  padding: 22px 26px 24px;
+}
+.boxHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.boxTitle {
+  font-family: var(--pa-font-display);
+  font-size: 22px;
+  display: block;
+}
+.box > .boxTitle {
+  margin-bottom: 12px;
+}
+.badge {
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  flex: none;
+}
+.badgeOk {
+  color: var(--pa-green);
+  border: 1px solid var(--pa-green-border);
+}
+.badgeDue {
+  color: var(--pa-deep);
+  border: 1px solid #d8b3ab;
+}
+.muted {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--pa-text-3);
+  margin: 0 0 12px;
+}
+.missing {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--pa-deep);
+  background: #fbf1ee;
+  border: 1px solid #d8b3ab;
+  padding: 8px 12px;
+  margin: 0 0 14px;
+}
+.preview {
+  margin: 0 0 14px;
+}
+.previewRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13.5px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--pa-row-divider);
+}
+.previewRow > span:last-child {
+  color: var(--pa-text-4);
+}
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 4px 0 14px;
+}
+.filed {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  padding-top: 12px;
+  border-top: 1px solid var(--pa-row-divider);
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.row2,
+.row3 {
+  display: grid;
+  gap: 12px;
+}
+.row2 {
+  grid-template-columns: 1fr 1fr;
+}
+.row3 {
+  grid-template-columns: 2fr 0.7fr 1fr;
+}
+.label {
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #9c907c;
+}
+.birth {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+}
+.birthInput {
+  width: 170px;
+}
+.saved {
+  font-size: 12px;
+  color: var(--pa-green);
+}
+.error {
+  font-size: 12.5px;
+  color: var(--pa-deep);
+}
+.subject {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--pa-row-divider);
+}
+.subjectName {
+  font-family: var(--pa-font-display);
+  font-size: 17px;
+  margin-bottom: 6px;
+}
+.noteWrap {
+  position: relative;
+}
+.note {
+  resize: vertical;
+  line-height: 1.5;
+  font-size: 13.5px;
+}
+.noteState {
+  display: block;
+  font-size: 11px;
+  color: var(--pa-text-6);
+  margin-top: 3px;
+  min-height: 14px;
+}

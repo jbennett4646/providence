@@ -1,0 +1,331 @@
+/* Buttons and small controls shared across the app screens (from the prototype). */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+  cursor: pointer;
+  font-family: var(--pa-font-ui);
+  font-size: 12.5px;
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  background: none;
+  color: inherit;
+  border-radius: 0;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.btn:disabled {
+  cursor: default;
+}
+
+.dark {
+  background: var(--pa-ink);
+  color: var(--pa-on-dark);
+}
+.dark:hover:not(:disabled) {
+  background: var(--pa-green);
+  color: var(--pa-on-dark);
+}
+
+.outline {
+  border-color: var(--pa-rule-5);
+  background: var(--pa-card);
+  color: var(--pa-ink);
+}
+.outline:hover:not(:disabled) {
+  border-color: var(--pa-accent);
+  color: var(--pa-ink);
+}
+
+.paper {
+  border-color: var(--pa-rule-5);
+  background: #fffcf6;
+  color: var(--pa-ink);
+}
+.paper:hover:not(:disabled) {
+  border-color: var(--pa-green);
+  color: var(--pa-ink);
+}
+.paperDeep:hover:not(:disabled) {
+  border-color: var(--pa-deep);
+}
+
+.green {
+  background: var(--pa-green);
+  color: #f2eee4;
+}
+.green:hover:not(:disabled) {
+  background: #24392c;
+  color: #f2eee4;
+}
+
+.deep {
+  background: var(--pa-deep);
+  color: #f2eee4;
+}
+.deep:hover:not(:disabled) {
+  background: var(--pa-deep-hi);
+  color: #f2eee4;
+}
+
+.inactive {
+  background: var(--pa-rule-1);
+  color: var(--pa-text-6);
+  cursor: default;
+}
+
+.onDark {
+  border-color: rgba(233, 222, 198, 0.35);
+  color: var(--pa-on-dark);
+}
+.onDark:hover:not(:disabled) {
+  border-color: var(--pa-accent);
+  color: var(--pa-on-dark);
+}
+
+.small {
+  padding: 7px 14px;
+  font-size: 12px;
+}
+
+.mid {
+  padding: 9px 16px;
+}
+
+/* Underlined text link in oxblood. */
+.link {
+  display: inline-block;
+  font-size: 12px;
+  color: var(--pa-deep);
+  border: none;
+  border-bottom: 1px solid #c4a78c;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--pa-font-ui);
+  text-decoration: none;
+}
+.link:hover {
+  color: var(--pa-deep-hi);
+}
+
+/* Muted underlined action ("Undo", "Remove", "Got it"). */
+.quiet {
+  font-size: 11.5px;
+  color: var(--pa-text-6);
+  border: none;
+  border-bottom: 1px solid var(--pa-rule-5);
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--pa-font-ui);
+}
+.quiet:hover {
+  color: var(--pa-deep);
+}
+
+/* Sliding switch: 42×22 (or 38×20 small). */
+.switch {
+  width: 42px;
+  height: 22px;
+  position: relative;
+  flex: none;
+  background: #d8cbb2;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 0;
+}
+.switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  background: var(--pa-card);
+}
+.switchOn {
+  background: var(--pa-green);
+}
+.switchOn::after {
+  left: 23px;
+  background: #f2eee4;
+}
+.switchSmall {
+  width: 38px;
+  height: 20px;
+}
+.switchSmall::after {
+  width: 14px;
+  height: 14px;
+}
+.switchSmall.switchOn::after {
+  left: 21px;
+}
+
+/* Checkbox square (18px). */
+.tick {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  border: 1.5px solid #c0b195;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.tickOn {
+  border: none;
+  background: var(--pa-green);
+}
+
+.checkRow {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 1px solid var(--pa-row-divider);
+  cursor: pointer;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-family: var(--pa-font-ui);
+  font-size: 13.5px;
+  color: var(--pa-ink);
+}
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--pa-rule-5);
+  background: #fffcf6;
+  cursor: pointer;
+  font-size: 15px;
+  color: var(--pa-ink);
+  padding: 0;
+  border-radius: 0;
+}
+.stepper:hover {
+  border-color: var(--pa-accent);
+}
+
+.input {
+  font-family: var(--pa-font-ui);
+  font-size: 13px;
+  padding: 8px 10px;
+  border: 1px solid var(--pa-rule-5);
+  background: #fffcf6;
+  color: var(--pa-ink);
+  width: 100%;
+  border-radius: 0;
+}
+
+/* Toggle group ("On screen" / "On paper"). */
+.segmented {
+  display: flex;
+  border: 1px solid var(--pa-rule-5);
+  background: var(--pa-card);
+}
+.segment {
+  display: inline-flex;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 12.5px;
+  padding: 7px 14px;
+  border: none;
+  background: none;
+  font-family: var(--pa-font-ui);
+  color: var(--pa-ink);
+}
+.segment:hover {
+  background: #f2eada;
+}
+.segmentOn,
+.segmentOn:hover {
+  background: var(--pa-ink);
+  color: var(--pa-on-dark);
+  cursor: default;
+}
+
+/* Pills (child picker on Teaching, course picker on the manual). */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 12.5px;
+  border: 1px solid var(--pa-rule-5);
+  background: var(--pa-card);
+  padding: 7px 14px;
+  color: var(--pa-ink);
+  font-family: var(--pa-font-ui);
+  text-decoration: none;
+}
+.pill:hover {
+  border-color: var(--pa-accent);
+  color: var(--pa-ink);
+}
+.pillOn,
+.pillOn:hover {
+  background: var(--pa-ink);
+  color: var(--pa-on-dark);
+  border-color: var(--pa-ink);
+  cursor: default;
+}
+
+.badgeFloor,
+.badgeAhead {
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 2px 5px;
+}
+.badgeFloor {
+  color: var(--pa-deep);
+  border: 1px solid #d8b3ab;
+}
+.badgeAhead {
+  color: var(--pa-green);
+  border: 1px solid var(--pa-green-border);
+}
+
+.card {
+  background: var(--pa-card);
+  border: 1px solid var(--pa-rule-2);
+}
+
+.kicker {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--pa-accent);
+  margin-bottom: 8px;
+}
+
+.back {
+  display: inline-flex;
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  color: var(--pa-text-3);
+  margin-bottom: 16px;
+}
+.back:hover {
+  color: var(--pa-deep);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

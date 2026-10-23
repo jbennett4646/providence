@@ -1,0 +1,27 @@
+.footer {
+  background: var(--pa-ink);
+  color: var(--pa-text-7);
+  font-size: 12px;
+}
+
+.wrap {
+  max-width: var(--pa-max-marketing);
+  margin: 0 auto;
+  padding: 34px var(--pa-gutter);
+  display: flex;
+  justify-content: space-between;
+}
+
+.name {
+  font-family: var(--pa-font-display);
+  letter-spacing: 0.1em;
+  color: var(--pa-accent);
+}
+
+.link {
+  color: inherit;
+}
+
+.link:hover {
+  color: var(--pa-on-dark-soft);
+}

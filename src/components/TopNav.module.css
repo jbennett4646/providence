@@ -1,0 +1,91 @@
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 0 26px;
+  height: var(--pa-topbar-h);
+  background: var(--pa-ink);
+  color: var(--pa-on-dark-soft);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.brand {
+  font-family: var(--pa-font-display);
+  font-size: 15px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pa-accent);
+}
+
+.brand:hover {
+  color: var(--pa-accent-hi);
+}
+
+.links {
+  display: flex;
+  gap: 26px;
+  align-items: stretch;
+  height: 100%;
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  font-size: 11.5px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--pa-on-dark-soft);
+}
+
+.link:hover {
+  color: #fff;
+}
+
+.muted {
+  color: var(--pa-text-4);
+}
+
+.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--pa-accent);
+}
+
+.account {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+}
+
+.who {
+  color: var(--pa-text-7);
+}
+
+.signOut,
+.signIn {
+  font-family: var(--pa-font-ui);
+  font-size: 11px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--pa-on-dark-soft);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.signOut:hover,
+.signIn:hover {
+  color: #fff;
+}

@@ -1,0 +1,10 @@
+.shell {
+  display: flex;
+  min-height: calc(100vh - var(--pa-topbar-h));
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  background: var(--pa-parchment);
+}

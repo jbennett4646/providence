@@ -1,0 +1,67 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 82px;
+  border-bottom: 1px solid rgba(233, 222, 198, 0.14);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: var(--pa-on-dark);
+  line-height: 1.1;
+}
+
+.brand:hover {
+  color: var(--pa-on-dark);
+}
+
+.name {
+  font-family: var(--pa-font-display);
+  font-size: 21px;
+  letter-spacing: 0.04em;
+}
+
+.motto {
+  font-size: 9.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--pa-text-7);
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  font-size: 12.5px;
+  letter-spacing: 0.05em;
+}
+
+.link {
+  color: #c9bca2;
+}
+
+.link:hover {
+  color: var(--pa-on-dark);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  background: var(--pa-accent);
+  color: var(--pa-ink);
+  padding: 9px 18px;
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.cta:hover {
+  background: var(--pa-accent-hi);
+  color: var(--pa-ink);
+}

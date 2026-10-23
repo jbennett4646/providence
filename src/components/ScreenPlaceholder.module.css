@@ -1,0 +1,32 @@
+.band {
+  padding: 30px var(--pa-gutter) 28px;
+  border-bottom: 1px solid var(--pa-rule-2);
+  background: var(--pa-band);
+}
+
+.kicker {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--pa-accent);
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: 38px;
+  margin: 0;
+}
+
+.body {
+  padding: 30px var(--pa-gutter) 48px;
+}
+
+.card {
+  max-width: 640px;
+  background: var(--pa-card);
+  border: 1px solid var(--pa-rule-2);
+  padding: 22px 24px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--pa-text-3);
+}
