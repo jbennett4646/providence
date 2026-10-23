@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Libre+Franklin:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#1F1B15;-webkit-font-smoothing:antialiased}
+  a{color:#7B2D26;text-decoration:none}
+  a:hover{color:#5E211C}
+</style>
+</helmet>
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%">
+
+  <section data-label="Grade 3 Overview" data-speaker-notes="For families already enrolled or committed. A walk through what the third-grade year holds: the courses, the daily rhythm, pacing, Georgia requirements and how to begin." style="background:#1F1B15;color:#EFE7D7;font-family:'Libre Franklin',sans-serif;display:flex;flex-direction:column;justify-content:space-between;padding:110px 140px 90px;box-sizing:border-box">
+    <div style="display:flex;align-items:center;gap:22px">
+      <svg width="54" height="62" viewBox="0 0 30 34" fill="none"><path d="M1 1h28v19.5C29 27 22.5 31 15 33 7.5 31 1 27 1 20.5V1Z" stroke="#A87C3D" stroke-width="1.2"></path><path d="M15 6v20M6 16h18" stroke="#A87C3D" stroke-width="1"></path></svg>
+      <span style="font-family:'EB Garamond',serif;font-size:34px;letter-spacing:.14em;text-transform:uppercase;color:#A87C3D">Providence Home Academy</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:34px">
+      <span style="font-size:26px;letter-spacing:.24em;text-transform:uppercase;color:#A87C3D">For enrolled families</span>
+      <h1 style="font-family:'EB Garamond',serif;font-weight:500;font-size:132px;line-height:1.02;letter-spacing:-.015em;margin:0;max-width:13ch">Grade Three Overview</h1>
+      <p style="font-size:34px;line-height:1.5;color:#BFB49E;margin:0;max-width:40ch">What your third grader will learn this year, and how the year runs.</p>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid rgba(233,222,198,.18);padding-top:28px;font-size:26px;color:#BFB49E">
+      <span>13 courses · 2 electives · 6 terms · 36 weeks</span>
+      <span>School year 2026–27</span>
+    </div>
+  </section>
+
+  <section data-label="A day at the table" data-speaker-notes="The daily core must happen every day, even on a sick day. The weekly work can go fast, slow, or be caught up." style="background:#E6DCC6;color:#1F1B15;font-family:'Libre Franklin',sans-serif;display:flex;flex-direction:column;padding:110px 140px 100px;box-sizing:border-box">
+    <h2 style="font-family:'EB Garamond',serif;font-weight:500;font-size:76px;line-height:1.08;letter-spacing:-.01em;margin:0 0 56px">A Day at the Table</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px">
+      <div style="background:#FBF7EF;border:1px solid #D5C4A3;padding:50px 54px;display:flex;flex-direction:column;gap:22px">
+        <span style="font-size:26px;letter-spacing:.2em;text-transform:uppercase;color:#33503F">Every day · about 40 minutes</span>
+        <span style="font-family:'EB Garamond',serif;font-size:48px;line-height:1.15">Short daily practice</span>
+        <p style="font-size:29px;line-height:1.5;color:#5E5648;margin:0">Scripture, recitation, spelling and drills. It's what keeps facts from fading, and on a sick day it's all that's asked.</p>
+      </div>
+      <div style="background:#FBF7EF;border:1px solid #D5C4A3;padding:50px 54px;display:flex;flex-direction:column;gap:22px">
+        <span style="font-size:26px;letter-spacing:.2em;text-transform:uppercase;color:#A87C3D">This week · your schedule</span>
+        <span style="font-family:'EB Garamond',serif;font-size:48px;line-height:1.15">The week's lessons</span>
+        <p style="font-size:29px;line-height:1.5;color:#5E5648;margin:0">Grammar, history, science, literature and the rest. Any day, any order. Finish early, double up, or save one for Saturday.</p>
+      </div>
+    </div>
+    <div style="margin-top:40px;background:#33503F;color:#EFE7D7;padding:34px 54px;display:flex;align-items:center;gap:50px">
+      <div style="display:flex;flex-direction:column;gap:10px;flex:none">
+        <span style="font-size:26px;letter-spacing:.2em;text-transform:uppercase;color:#D9C08F">On screen or on paper</span>
+        <span style="font-family:'EB Garamond',serif;font-size:42px;line-height:1.15">Keep the screen away if you like.</span>
+      </div>
+      <p style="font-size:27px;line-height:1.5;color:#DCE5D8;margin:0">Print the year plan once and each term’s manual as you reach it. A one-tap weekly check-in keeps the records current.</p>
+    </div>
+  </section>
+
+  <section data-label="Pacing by subject" data-speaker-notes="Each subject moves at the child's own speed. The grade is set by the slowest required subject, so no record overstates. This is an example child." style="background:#1F1B15;color:#EFE7D7;font-family:'Libre Franklin',sans-serif;display:grid;grid-template-columns:.85fr 1.15fr;gap:110px;padding:110px 140px 100px;box-sizing:border-box;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:34px">
+      <h2 style="font-family:'EB Garamond',serif;font-weight:500;font-size:76px;line-height:1.08;letter-spacing:-.01em;margin:0">Pacing by Subject</h2>
+      <p style="font-size:30px;line-height:1.55;color:#BFB49E;margin:0;text-wrap:pretty">Each subject moves at the speed the child actually learns. The grade is set by the slowest required subject, and every position is shown.</p>
+      <div style="border:1px solid #A87C3D;padding:30px 34px;display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:24px;letter-spacing:.2em;text-transform:uppercase;color:#A87C3D">The records keep themselves</span>
+        <span style="font-size:27px;line-height:1.5;color:#EFE7D7">Attendance, hours, progress reports and transcripts build as you teach, on your state’s schedule. Mastery and completion, never an inflated grade.</span>
+      </div>
+    </div>
+    <div style="border:1px solid rgba(233,222,198,.18);background:#26221B;padding:44px 50px 36px">
+      <div style="font-size:24px;letter-spacing:.2em;text-transform:uppercase;color:#8C8172;padding-bottom:22px;border-bottom:1px solid rgba(233,222,198,.14)">Example · a third-grader in October</div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;padding:22px 0;border-bottom:1px solid rgba(233,222,198,.09)"><span style="font-family:'EB Garamond',serif;font-size:38px">Arithmetic</span><span style="font-size:27px;color:#A87C3D">Grade 4 · Week 5</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;padding:22px 0;border-bottom:1px solid rgba(233,222,198,.09)"><span style="font-family:'EB Garamond',serif;font-size:38px">History &amp; Geography</span><span style="font-size:27px;color:#A87C3D">Grade 3 · Week 23</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;padding:22px 0;border-bottom:1px solid rgba(233,222,198,.09)"><span style="font-family:'EB Garamond',serif;font-size:38px">Science</span><span style="font-size:27px;color:#A87C3D">Grade 3 · Week 23</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;padding:22px 0;border-bottom:1px solid rgba(233,222,198,.09)"><span style="font-family:'EB Garamond',serif;font-size:38px">Latin I</span><span style="font-size:27px;color:#A87C3D">Grade 3 · Week 9</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:24px;letter-spacing:.08em;text-transform:uppercase;color:#8C8172;padding-top:24px"><span>Grade 3 in progress</span><span>Latin sets the pace</span></div>
+    </div>
+  </section>
+
+  <section data-label="Inside Grade Three" data-speaker-notes="What a parent receives for third grade. Each course has a year plan and six term manuals with daily scripts, reference pages and answer keys. Workshop and Hearth are optional." style="background:#EFE7D7;color:#1F1B15;font-family:'Libre Franklin',sans-serif;display:flex;flex-direction:column;padding:76px 140px 64px;box-sizing:border-box">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:60px;margin-bottom:34px">
+      <h2 style="font-family:'EB Garamond',serif;font-weight:500;font-size:76px;line-height:1.08;letter-spacing:-.01em;margin:0">Inside Grade Three</h2>
+      <span style="font-size:26px;letter-spacing:.16em;text-transform:uppercase;color:#A87C3D;padding-bottom:12px">13 courses · 2 electives · 6 terms · 36 weeks</span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);column-gap:64px;row-gap:18px">
+      <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #CFC1A4;padding-top:16px">
+        <span style="font-family:'EB Garamond',serif;font-size:36px;line-height:1.1">Literature</span>
+        <span style="font-size:24px;line-height:1.4;color:#5E5648;text-wrap:pretty">Read-alouds that follow the history year, from exploration to 1850</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #CFC1A4;padding-top:16px">
+        <span style="font-family:'EB Garamond',serif;font-size:36px;line-height:1.1">Grammar & Composition</span>
+        <span style="font-size:24px;line-height:1.4;color:#5E5648;text-wrap:pretty">Parts of speech, and writing that grows from retelling a fable</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #CFC1A4;padding-top:16px">
+        <span style="font-family:'EB Garamond',serif;font-size:36px;line-height:1.1">Spelling & Vocabulary</span>
+        <span style="font-size:24px;line-height:1.4;color:#5E5648;text-wrap:pretty">Weekly word lists, dictation and word study</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #CFC1A4;padding-top:16px">
+        <span style="font-family:'EB Garamond',serif;font-size:36px;line-height:1.1">Penmanship</span>
+        <span style="font-size:24px;line-height:1.4;color:#5E5648;text-wrap:pretty">Cursive, from lowercase to the year’s fair copy</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #CFC1A4;padding-top:16px">
+        <span style="font-family:'EB Garamond',serif;font-size:36px;line-height:1.1">Arithmetic</span>
+        <span style="font-size:24px;line-height:1.4;color:#5E5648;text-wrap:pretty">Times tables, division, money, time and measurement</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #CFC1A4;padding-top:16px">
+        <span style="font-family:'EB Garamond',serif;font-size:36px;line-height:1.1">History & Geography</span>
+        <span style="font-size:24px;line-height:1.4;color:#5E5648;text-wrap:pretty">America from first settlements to 1850</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #CFC1A4;padding-top:16px">
+        <span style="font-family:'EB Garamond',serif;font-size:36px;line-height:1.1">Science</span>
+        <span style="font-size:24px;line-height:1.4;color:#5E5648;text-wrap:pretty">Matter, mixtures, changes and everyday chemistry</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #CFC1A4;padding-top:16px">
+        <span style="font-family:'EB Garamond',serif;font-size:36px;line-height:1.1">Latin I</span>
+        <span style="font-size:24px;line-height:1.4;color:#5E5648;text-wrap:pretty">Pronunciation, first declensions and conjugations, a Latin prayer</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #CFC1A4;padding-top:16px">
+        <span style="font-family:'EB Garamond',serif;font-size:36px;line-height:1.1">Bible & Christian Studies</span>
+        <span style="font-size:24px;line-height:1.4;color:#5E5648;text-wrap:pretty">Creation to the early Church, read in its own words</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #CFC1A4;padding-top:16px">
+        <span style="font-family:'EB Garamond',serif;font-size:36px;line-height:1.1">Memory Work & Recitation</span>
+        <span style="font-size:24px;line-height:1.4;color:#5E5648;text-wrap:pretty">Scripture and poems, closing with a year-end recitation</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #CFC1A4;padding-top:16px">
+        <span style="font-family:'EB Garamond',serif;font-size:36px;line-height:1.1">Fine Arts</span>
+        <span style="font-size:24px;line-height:1.4;color:#5E5648;text-wrap:pretty">Vivaldi to Beethoven; John White to Edward Hicks</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #CFC1A4;padding-top:16px">
+        <span style="font-family:'EB Garamond',serif;font-size:36px;line-height:1.1">Physical Education</span>
+        <span style="font-size:24px;line-height:1.4;color:#5E5648;text-wrap:pretty">Seasonal skills, the Virginia reel and field day</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #CFC1A4;padding-top:16px">
+        <span style="font-family:'EB Garamond',serif;font-size:36px;line-height:1.1">Virtue Formation</span>
+        <span style="font-size:24px;line-height:1.4;color:#5E5648;text-wrap:pretty">One virtue or pair of virtues each term</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #CFC1A4;padding-top:16px">
+        <span style="font-family:'EB Garamond',serif;font-size:36px;line-height:1.1;color:#7A7161">Workshop</span>
+        <span style="font-size:24px;line-height:1.4;color:#5E5648;text-wrap:pretty">Elective · hand tools, woodworking, knots and home repair</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #CFC1A4;padding-top:16px">
+        <span style="font-family:'EB Garamond',serif;font-size:36px;line-height:1.1;color:#7A7161">Hearth</span>
+        <span style="font-size:24px;line-height:1.4;color:#5E5648;text-wrap:pretty">Elective · cooking, preserving, mending and the kitchen garden</span>
+      </div>
+    </div>
+    <div style="margin-top:auto;font-size:26px;color:#3E382E;border-top:1px solid #1F1B15;padding-top:20px">Each course: a year plan, six term manuals with daily scripts, reference pages and answer keys.</div>
+  </section>
+
+  <section data-label="Georgia home study" data-speaker-notes="Georgia requires five subjects, 180 days of 4.5 hours, a Declaration of Intent and an annual progress report. Grade Three covers every required subject; we prepare the paperwork and the family signs and files it." style="background:#1F1B15;color:#EFE7D7;font-family:'Libre Franklin',sans-serif;display:grid;grid-template-columns:.8fr 1.2fr;gap:110px;padding:110px 140px 100px;box-sizing:border-box;align-items:center">
+    <div style="display:flex;flex-direction:column;gap:34px">
+      <span style="font-size:26px;letter-spacing:.2em;text-transform:uppercase;color:#A87C3D">Georgia home study law</span>
+      <h2 style="font-family:'EB Garamond',serif;font-weight:500;font-size:76px;line-height:1.08;letter-spacing:-.01em;margin:0">Every Required Subject, Covered</h2>
+      <p style="font-size:30px;line-height:1.55;color:#BFB49E;margin:0;text-wrap:pretty">Grade Three is mapped to O.C.G.A. § 20-2-690. The records track 180 school days of four and a half hours.</p>
+      <div style="border:1px solid #A87C3D;padding:30px 34px;display:flex;flex-direction:column;gap:12px">
+        <span style="font-size:24px;letter-spacing:.2em;text-transform:uppercase;color:#A87C3D">We prepare the paperwork</span>
+        <span style="font-size:27px;line-height:1.5">Your Declaration of Intent and annual progress report, filled in. You sign and file.</span>
+      </div>
+    </div>
+    <div style="border:1px solid rgba(233,222,198,.18);background:#26221B;padding:44px 50px 36px">
+      <div style="display:grid;grid-template-columns:300px 1fr;gap:30px;font-size:24px;letter-spacing:.12em;text-transform:uppercase;color:#8C8172;padding-bottom:22px;border-bottom:1px solid rgba(233,222,198,.14)"><span style="white-space:nowrap">Georgia requires</span><span style="white-space:nowrap;text-align:right">Grade Three course</span></div>
+      <div style="display:grid;grid-template-columns:300px 1fr;gap:30px;align-items:baseline;padding:24px 0;border-bottom:1px solid rgba(233,222,198,.09)"><span style="font-family:'EB Garamond',serif;font-size:38px">Reading</span><span style="font-size:27px;line-height:1.4;color:#A87C3D;text-align:right">Literature · Memory Work & Recitation</span></div>
+      <div style="display:grid;grid-template-columns:300px 1fr;gap:30px;align-items:baseline;padding:24px 0;border-bottom:1px solid rgba(233,222,198,.09)"><span style="font-family:'EB Garamond',serif;font-size:38px">Language Arts</span><span style="font-size:27px;line-height:1.4;color:#A87C3D;text-align:right">Grammar & Composition · Spelling & Vocabulary · Penmanship</span></div>
+      <div style="display:grid;grid-template-columns:300px 1fr;gap:30px;align-items:baseline;padding:24px 0;border-bottom:1px solid rgba(233,222,198,.09)"><span style="font-family:'EB Garamond',serif;font-size:38px">Mathematics</span><span style="font-size:27px;line-height:1.4;color:#A87C3D;text-align:right">Arithmetic</span></div>
+      <div style="display:grid;grid-template-columns:300px 1fr;gap:30px;align-items:baseline;padding:24px 0;border-bottom:1px solid rgba(233,222,198,.09)"><span style="font-family:'EB Garamond',serif;font-size:38px">Social Studies</span><span style="font-size:27px;line-height:1.4;color:#A87C3D;text-align:right">History & Geography</span></div>
+      <div style="display:grid;grid-template-columns:300px 1fr;gap:30px;align-items:baseline;padding:24px 0;border-bottom:1px solid rgba(233,222,198,.09)"><span style="font-family:'EB Garamond',serif;font-size:38px">Science</span><span style="font-size:27px;line-height:1.4;color:#A87C3D;text-align:right">Science</span></div>
+      <div style="font-size:24px;line-height:1.45;color:#8C8172;padding-top:24px">Latin, Bible, Fine Arts, PE and Virtue Formation go beyond the requirement.</div>
+    </div>
+  </section>
+
+  <section data-label="The seven virtues" data-speaker-notes="Every school forms character through what it rewards and repeats. Ours is written down: each virtue and how it is taught." style="background:#E6DCC6;color:#1F1B15;font-family:'Libre Franklin',sans-serif;display:flex;flex-direction:column;padding:100px 140px 90px;box-sizing:border-box">
+    <h2 style="font-family:'EB Garamond',serif;font-weight:500;font-size:76px;line-height:1.08;letter-spacing:-.01em;margin:0 0 50px">The Seven Virtues</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:#D2C4A8;border:2px solid #D2C4A8;flex:1">
+      <div style="background:#EFE7D7;padding:30px 32px;display:flex;flex-direction:column;gap:12px">
+        <span style="font-family:'EB Garamond',serif;font-size:24px;letter-spacing:.2em;color:#A87C3D">I</span>
+        <span style="font-family:'EB Garamond',serif;font-size:40px;line-height:1.1">Prudence</span>
+        <span style="font-size:24px;line-height:1.45;color:#5E5648">Logic, and stating the other side’s case before answering it.</span>
+      </div>
+      <div style="background:#EFE7D7;padding:30px 32px;display:flex;flex-direction:column;gap:12px">
+        <span style="font-family:'EB Garamond',serif;font-size:24px;letter-spacing:.2em;color:#A87C3D">II</span>
+        <span style="font-family:'EB Garamond',serif;font-size:40px;line-height:1.1">Justice</span>
+        <span style="font-size:24px;line-height:1.45;color:#5E5648">History read from sources, so judgment rests on what people did.</span>
+      </div>
+      <div style="background:#EFE7D7;padding:30px 32px;display:flex;flex-direction:column;gap:12px">
+        <span style="font-family:'EB Garamond',serif;font-size:24px;letter-spacing:.2em;color:#A87C3D">III</span>
+        <span style="font-family:'EB Garamond',serif;font-size:40px;line-height:1.1">Fortitude</span>
+        <span style="font-size:24px;line-height:1.45;color:#5E5648">Hard subjects kept hard. Latin is not made easier to be kind.</span>
+      </div>
+      <div style="background:#EFE7D7;padding:30px 32px;display:flex;flex-direction:column;gap:12px">
+        <span style="font-family:'EB Garamond',serif;font-size:24px;letter-spacing:.2em;color:#A87C3D">IV</span>
+        <span style="font-family:'EB Garamond',serif;font-size:40px;line-height:1.1">Temperance</span>
+        <span style="font-size:24px;line-height:1.45;color:#5E5648">A daily rhythm, finished work, and a school day that ends.</span>
+      </div>
+      <div style="background:#EFE7D7;padding:30px 32px;display:flex;flex-direction:column;gap:12px">
+        <span style="font-family:'EB Garamond',serif;font-size:24px;letter-spacing:.2em;color:#A87C3D">V</span>
+        <span style="font-family:'EB Garamond',serif;font-size:40px;line-height:1.1">Faith</span>
+        <span style="font-size:24px;line-height:1.45;color:#5E5648">Sacred history read whole, in its own words.</span>
+      </div>
+      <div style="background:#EFE7D7;padding:30px 32px;display:flex;flex-direction:column;gap:12px">
+        <span style="font-family:'EB Garamond',serif;font-size:24px;letter-spacing:.2em;color:#A87C3D">VI</span>
+        <span style="font-family:'EB Garamond',serif;font-size:40px;line-height:1.1">Hope</span>
+        <span style="font-size:24px;line-height:1.45;color:#5E5648">Psalms, poems and speeches carried into adult life.</span>
+      </div>
+      <div style="background:#EFE7D7;padding:30px 32px;display:flex;flex-direction:column;gap:12px">
+        <span style="font-family:'EB Garamond',serif;font-size:24px;letter-spacing:.2em;color:#A87C3D">VII</span>
+        <span style="font-family:'EB Garamond',serif;font-size:40px;line-height:1.1">Charity</span>
+        <span style="font-size:24px;line-height:1.45;color:#5E5648">Recitation to a listener, because clear speech is for another person.</span>
+      </div>
+      <div style="background:#1F1B15;color:#EFE7D7;padding:30px 32px;display:flex;flex-direction:column;justify-content:flex-end;gap:12px">
+        <span style="font-family:'EB Garamond',serif;font-style:italic;font-size:34px;line-height:1.3">Character is formed on purpose or by accident.</span>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Getting started" data-speaker-notes="What to do in the first week: set the start date, place each subject, choose paper or screen. We prepare the Declaration of Intent; the family signs and files it within 30 days." style="background:#1F1B15;color:#EFE7D7;font-family:'Libre Franklin',sans-serif;display:flex;flex-direction:column;padding:110px 140px 90px;box-sizing:border-box">
+    <h2 style="font-family:'EB Garamond',serif;font-weight:500;font-size:76px;line-height:1.08;letter-spacing:-.01em;margin:0 0 80px">Your First Week</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:60px">
+      <div style="display:flex;flex-direction:column;gap:22px;border-top:1px solid rgba(233,222,198,.25);padding-top:32px">
+        <span style="font-family:'EB Garamond',serif;font-size:28px;letter-spacing:.24em;color:#A87C3D">I</span>
+        <span style="font-family:'EB Garamond',serif;font-size:44px;line-height:1.15">Set your start date</span>
+        <span style="font-size:27px;line-height:1.5;color:#BFB49E">The calendar lays out 36 weeks from the day you begin. Add breaks as you know them.</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:22px;border-top:1px solid rgba(233,222,198,.25);padding-top:32px">
+        <span style="font-family:'EB Garamond',serif;font-size:28px;letter-spacing:.24em;color:#A87C3D">II</span>
+        <span style="font-family:'EB Garamond',serif;font-size:44px;line-height:1.15">Place each subject</span>
+        <span style="font-size:27px;line-height:1.5;color:#BFB49E">A short placement check in each subject shows which term to begin in.</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:22px;border-top:1px solid rgba(233,222,198,.25);padding-top:32px">
+        <span style="font-family:'EB Garamond',serif;font-size:28px;letter-spacing:.24em;color:#A87C3D">III</span>
+        <span style="font-family:'EB Garamond',serif;font-size:44px;line-height:1.15">File your declaration</span>
+        <span style="font-size:27px;line-height:1.5;color:#BFB49E">We prepare the Declaration of Intent. You sign and file it within 30 days of starting.</span>
+      </div>
+    </div>
+    <div style="margin-top:auto;display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid rgba(233,222,198,.18);padding-top:28px;font-size:28px">
+      <span style="font-family:'EB Garamond',serif;letter-spacing:.14em;text-transform:uppercase;color:#A87C3D">Providence Home Academy</span>
+      <span style="color:#EFE7D7">providence-home.academy · Josh Bennett · josh@joshwbennett.com · 678-544-7328</span>
+    </div>
+  </section>
+
+</x-import>
+</x-dc>
+</body>
+</html>
