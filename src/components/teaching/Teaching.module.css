@@ -918,3 +918,45 @@
 .extraMins {
   color: var(--pa-text-4);
 }
+
+/* Grade 3 test readiness guide */
+.readinessToday {
+  font-size: 12.5px;
+  color: var(--pa-text-4);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.readinessQuote {
+  margin: 0 0 18px;
+  padding-left: 14px;
+  border-left: 2px solid var(--pa-accent);
+  font-family: var(--pa-font-display);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--pa-text-1);
+}
+.readinessList {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--pa-text-3);
+}
+.readinessList li + li {
+  margin-top: 6px;
+}
+.testDate {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--pa-text-3);
+}
+.testDateInput {
+  width: auto;
+  padding: 5px 8px;
+  font-size: 13px;
+}

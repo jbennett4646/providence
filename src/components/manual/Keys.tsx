@@ -16,6 +16,10 @@ export function KeysProvider({ children, initial = false }: { children: ReactNod
   return <KeysContext.Provider value={{ on, toggle: () => setOn((v) => !v) }}>{children}</KeysContext.Provider>;
 }
 
+export function useKeys() {
+  return useContext(KeysContext);
+}
+
 export function KeysSwitch() {
   const { on, toggle } = useContext(KeysContext);
   return <Switch on={on} label="Show answer keys" onToggle={toggle} />;

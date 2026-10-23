@@ -1,0 +1,105 @@
+.screen {
+  min-height: calc(100vh - var(--pa-topbar-h));
+  background: var(--pa-parchment);
+}
+.band {
+  background: var(--pa-band);
+  border-bottom: 1px solid var(--pa-rule-2);
+}
+.bandIn {
+  max-width: var(--pa-max-app);
+  margin: 0 auto;
+  padding: 26px var(--pa-gutter) 26px;
+}
+.titleRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+}
+.title {
+  font-size: 40px;
+  margin: 0;
+}
+.subtitle {
+  font-family: var(--pa-font-display);
+  font-style: italic;
+  font-size: 17px;
+  color: var(--pa-text-3);
+  margin: 6px 0 0;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex: none;
+}
+.actions > a {
+  margin-right: 14px;
+}
+.keysLabel {
+  font-size: 12.5px;
+  color: var(--pa-text-4);
+}
+.body {
+  max-width: var(--pa-max-app);
+  margin: 0 auto;
+  padding: 30px var(--pa-gutter) 64px;
+  display: flex;
+  gap: 26px;
+  align-items: flex-start;
+}
+.nav {
+  flex: 0 0 230px;
+  position: sticky;
+  top: 66px;
+}
+.navTitle {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--pa-rule-1);
+  font-family: var(--pa-font-display);
+  font-size: 18px;
+}
+.navItem {
+  display: block;
+  padding: 8px 18px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--pa-ink);
+}
+.navItem:hover {
+  background: #f2eada;
+  color: var(--pa-ink);
+}
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Phones and narrow windows: one column, the contents above the guide. */
+@media (max-width: 820px) {
+  .bandIn,
+  .body {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .titleRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .title {
+    font-size: 32px;
+  }
+  .actions {
+    flex-wrap: wrap;
+  }
+  .body {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .nav {
+    position: static;
+    flex: none;
+  }
+}

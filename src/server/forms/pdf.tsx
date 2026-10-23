@@ -1,6 +1,6 @@
 import "server-only";
-import path from "node:path";
-import { Document, Font, Page, Path, renderToBuffer, StyleSheet, Svg, Text, View } from "@react-pdf/renderer";
+import { Document, Page, Path, renderToBuffer, StyleSheet, Svg, Text, View } from "@react-pdf/renderer";
+import { registerFonts } from "../pdf/fonts";
 import type { ReactNode } from "react";
 import type { DeclarationModel, ReportCourse, ReportModel } from "./model";
 
@@ -9,25 +9,7 @@ import type { DeclarationModel, ReportCourse, ReportModel } from "./model";
  * and Libre Franklin for small print, embedded from assets/fonts (OFL).
  */
 
-const FONTS = path.join(process.cwd(), "assets", "fonts");
-Font.register({
-  family: "Garamond",
-  fonts: [
-    { src: path.join(FONTS, "EBGaramond-Regular.ttf") },
-    { src: path.join(FONTS, "EBGaramond-Medium.ttf"), fontWeight: 500 },
-    { src: path.join(FONTS, "EBGaramond-Italic.ttf"), fontStyle: "italic" },
-  ],
-});
-Font.register({
-  family: "Franklin",
-  fonts: [
-    { src: path.join(FONTS, "LibreFranklin-Regular.ttf") },
-    { src: path.join(FONTS, "LibreFranklin-Medium.ttf"), fontWeight: 500 },
-    { src: path.join(FONTS, "LibreFranklin-SemiBold.ttf"), fontWeight: 600 },
-  ],
-});
-// Keep words whole; the forms never need hyphenation.
-Font.registerHyphenationCallback((word) => [word]);
+registerFonts();
 
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 /** "1 May 2017" */
@@ -249,6 +231,16 @@ export function ReportDoc({ m }: { m: ReportModel }) {
               : "No school days recorded here yet."}
           </Text>
         </View>
+
+        {m.testing && (
+          <View style={s.section} wrap={false}>
+            <Text style={s.sectionTitle}>Standardized test</Text>
+            <Text>
+              {m.testing.givenOn ? `A nationally standardized test was given on ${m.testing.givenOn}.` : "A nationally standardized test is due at the end of this grade."} The
+              results are kept with the family&apos;s records.
+            </Text>
+          </View>
+        )}
 
         <Text style={[s.label, { marginBottom: 8 }]}>{m.georgia ? "The five subjects Georgia requires" : "Core subjects"}</Text>
         {m.subjects.map((sub) => (

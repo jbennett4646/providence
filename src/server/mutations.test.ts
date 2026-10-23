@@ -3,7 +3,7 @@ import { beforeAll, describe, expect, it } from "vitest";
 import { importCatalog } from "@/db/catalog";
 import { connect, connectPglite, migrate, type Db } from "@/db/client";
 import { addChild, createHousehold } from "@/db/households";
-import { attendanceDays, checkins, enrollments, gates, itemRecords, streakDays, teachingEntries } from "@/db/schema";
+import { attendanceDays, checkins, enrollments, gates, guideSessions, itemRecords, streakDays, teachingEntries, testRecords } from "@/db/schema";
 import { getCourse, getWeek } from "@/lib/content/load";
 import * as m from "./mutations";
 
@@ -154,5 +154,74 @@ describe("paper mode", () => {
     await m.togglePaperRoutine(db, paper, DAY);
     const [b] = await db.select().from(attendanceDays).where(eq(attendanceDays.childId, child.id));
     expect(b).toMatchObject({ paperRoutine: false, routineMins: 0 });
+  });
+});
+
+describe("Grade 3 test readiness", () => {
+  const attendance = async (childId: string, date = DAY) =>
+    (await db.select().from(attendanceDays).where(and(eq(attendanceDays.childId, childId), eq(attendanceDays.date, date))))[0];
+  const sessions = async (childId: string) =>
+    (await db.select().from(guideSessions).where(eq(guideSessions.childId, childId))).map((s) => s.session).sort((a, b) => a - b);
+
+  it("counts a practice session's 15–20 minutes toward the day, and undoes it", async () => {
+    const { child } = await setup();
+    await m.recordReadiness(db, child, DAY, 1);
+    expect(await sessions(child.id)).toEqual([1]);
+    expect((await attendance(child.id)).routineMins).toBe(18);
+    await m.recordItem(db, child, DAY, { grade: 3, courseId: "latin", week: 1, track: "daily", key: "1", outcome: "well" });
+    const both = (await attendance(child.id)).routineMins;
+    expect(both).toBeGreaterThan(18);
+    await m.undoReadiness(db, child, DAY, 1);
+    expect(await sessions(child.id)).toEqual([]);
+    expect((await attendance(child.id)).routineMins).toBe(both - 18);
+  });
+
+  it("only undoes a session on the day it was recorded", async () => {
+    const { child } = await setup();
+    await m.recordReadiness(db, child, "2026-10-20", 1);
+    await m.undoReadiness(db, child, DAY, 1);
+    expect(await sessions(child.id)).toEqual([1]);
+  });
+
+  it("leaves the floor rule and course positions alone", async () => {
+    const { child } = await setup();
+    const before = (await pos(child.id)).pos;
+    await m.recordReadiness(db, child, DAY, 1);
+    expect((await pos(child.id)).pos).toBe(before);
+    expect(await db.select().from(checkins).where(eq(checkins.childId, child.id))).toEqual([]);
+  });
+
+  it("checks in a whole practice week on paper", async () => {
+    const { child } = await setup();
+    await m.readinessWeekDone(db, child.id, DAY, 34);
+    expect(await sessions(child.id)).toEqual([1, 2, 3, 4, 5]);
+    await m.readinessWeekDone(db, child.id, DAY, 35);
+    await m.readinessWeekDone(db, child.id, DAY, 35);
+    expect(await sessions(child.id)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+  });
+
+  it("adds the practice to a paper day's routine", async () => {
+    const { child } = await setup();
+    const paper = { ...child, mode: "paper" as const };
+    await m.togglePaperRoutine(db, paper, DAY);
+    const usual = (await attendance(child.id)).routineMins;
+    await m.togglePaperRoutine(db, paper, DAY);
+    await m.togglePaperRoutine(db, paper, DAY, 18);
+    expect((await attendance(child.id)).routineMins).toBe(usual + 18);
+  });
+
+  it("records, changes and clears the test date", async () => {
+    const { child } = await setup();
+    const date = async () => (await db.select().from(testRecords).where(eq(testRecords.childId, child.id))).map((r) => r.givenOn);
+    await m.setTestDate(db, child.id, "grade3-cat", "2027-05-18");
+    await m.setTestDate(db, child.id, "grade3-cat", "2027-05-19");
+    expect(await date()).toEqual(["2027-05-19"]);
+    await m.setTestDate(db, child.id, "grade3-cat", null);
+    expect(await date()).toEqual([]);
+  });
+
+  it("rejects a session outside the plan", async () => {
+    const { child } = await setup();
+    await expect(m.recordReadiness(db, child, DAY, 11)).rejects.toThrow();
   });
 });

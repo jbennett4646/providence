@@ -458,6 +458,38 @@ export const filings = pgTable(
   (t) => [primaryKey({ columns: [t.householdId, t.form, t.schoolYear] })],
 );
 
+/** A practice session from a grade guide done on a day, e.g. Grade 3 test readiness, session 1–10. */
+export const guideSessions = pgTable(
+  "guide_sessions",
+  {
+    childId: uuid("child_id")
+      .notNull()
+      .references(() => children.id, { onDelete: "cascade" }),
+    grade: smallint("grade").notNull(),
+    guideId: text("guide_id").notNull(),
+    session: smallint("session").notNull(),
+    doneOn: date("done_on").notNull(),
+  },
+  (t) => [
+    primaryKey({ columns: [t.childId, t.grade, t.guideId, t.session] }),
+    check("guide_sessions_session", sql`${t.session} between 1 and 10`),
+  ],
+);
+
+/** When a child sat a standardized test. Only the date: scores stay with the family. */
+export const testRecords = pgTable(
+  "test_records",
+  {
+    childId: uuid("child_id")
+      .notNull()
+      .references(() => children.id, { onDelete: "cascade" }),
+    testId: text("test_id").notNull(),
+    givenOn: date("given_on").notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [primaryKey({ columns: [t.childId, t.testId] })],
+);
+
 // ---------------------------------------------------------------------------
 // Relations
 
@@ -477,6 +509,8 @@ export const childrenRelations = relations(children, ({ one, many }) => ({
   checkins: many(checkins),
   printed: many(printedDocs),
   teachingEntries: many(teachingEntries),
+  guideSessions: many(guideSessions),
+  testRecords: many(testRecords),
 }));
 
 export const teachingEntriesRelations = relations(teachingEntries, ({ one }) => ({
@@ -517,4 +551,12 @@ export const checkinsRelations = relations(checkins, ({ one }) => ({
 
 export const printedDocsRelations = relations(printedDocs, ({ one }) => ({
   child: one(children, { fields: [printedDocs.childId], references: [children.id] }),
+}));
+
+export const guideSessionsRelations = relations(guideSessions, ({ one }) => ({
+  child: one(children, { fields: [guideSessions.childId], references: [children.id] }),
+}));
+
+export const testRecordsRelations = relations(testRecords, ({ one }) => ({
+  child: one(children, { fields: [testRecords.childId], references: [children.id] }),
 }));

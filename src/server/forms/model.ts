@@ -5,10 +5,11 @@ import { filings, reportNotes, users } from "@/db/schema";
 import { getCourse } from "@/lib/content/load";
 import { termOfWeek } from "@/lib/content/year";
 import { summarize } from "@/lib/domain/attendance";
-import { GEORGIA, type StateRules } from "@/lib/domain/compliance";
+import { GEORGIA, isTestingGrade, type StateRules } from "@/lib/domain/compliance";
 import { fmtLong, type DateKey } from "@/lib/domain/dates";
 import { ageOn, declarationDue, declarationMissing, schoolYearLabel, schoolYearPeriod } from "@/lib/domain/forms";
 import { gradeLabel } from "@/lib/domain/grades";
+import { READINESS_GRADE, READINESS_TEST } from "@/lib/domain/readiness";
 import type { HouseholdSnapshot } from "@/db/households";
 import { householdContext, loadChildRecords, type Child, type HouseholdContext } from "../state";
 import { childProgress, isScored, liveCourses } from "../views";
@@ -86,6 +87,8 @@ export type ReportModel = {
   beyond: ReportCourse[];
   rules: StateRules;
   georgia: boolean;
+  /** In a state testing grade: when the standardized test was given, if recorded. Results stay with the family. */
+  testing: { required: true; givenOn: string | null } | null;
   prepared: string;
 };
 
@@ -148,6 +151,9 @@ export async function reportModel(h: HouseholdSnapshot, child: Child): Promise<R
       .filter((x): x is ReportCourse => x !== null),
     rules: ctx.rules ?? GEORGIA,
     georgia: !!ctx.rules && ctx.rules.code === "GA",
+    testing: isTestingGrade(ctx.rules, child.grade)
+      ? { required: true, givenOn: rec.tests.get(READINESS_TEST) && child.grade === READINESS_GRADE ? fmtLong(rec.tests.get(READINESS_TEST)!) : null }
+      : null,
     prepared: fmtLong(ctx.today),
   };
 }

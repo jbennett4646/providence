@@ -6,8 +6,11 @@ import { getDb } from "@/db/client";
 import { addChild as addChildDb, setElective } from "@/db/households";
 import { EXTRA_OPTIONS } from "@/lib/domain/attendance";
 import { isDateKey, todayIn } from "@/lib/domain/dates";
+import { READINESS_GRADE, READINESS_TEST } from "@/lib/domain/readiness";
 import * as m from "@/server/mutations";
+import { readinessToday } from "@/server/readiness";
 import { currentHousehold, requireOwnChild, setChildCookie } from "@/server/session";
+import { householdContext } from "@/server/state";
 
 /*
  * Server actions behind every button. Each checks the household (and child)
@@ -191,8 +194,42 @@ export async function removeExtra(childId: string, index: number) {
 }
 
 export async function togglePaperRoutine(childId: string) {
-  const { db, child, today } = await childCtx(childId);
-  await m.togglePaperRoutine(db, child, today);
+  const { db, child, today, h } = await childCtx(childId);
+  await m.togglePaperRoutine(db, child, today, readinessToday(child, householdContext(h)).practiceMins);
+  refresh();
+}
+
+// ---------------------------------------------------------------------------
+// Grade 3 test readiness
+
+async function readinessCtx(childId: string) {
+  const c = await childCtx(childId);
+  if (c.child.grade !== READINESS_GRADE) throw new Error("Test readiness is a Grade 3 guide");
+  return c;
+}
+
+export async function recordReadiness(childId: string, session: number) {
+  const { db, child, today } = await readinessCtx(childId);
+  await m.recordReadiness(db, child, today, Number(session));
+  refresh();
+}
+
+export async function undoReadiness(childId: string, session: number) {
+  const { db, child, today } = await readinessCtx(childId);
+  await m.undoReadiness(db, child, today, Number(session));
+  refresh();
+}
+
+export async function readinessWeekDone(childId: string, week: 34 | 35) {
+  const { db, today } = await readinessCtx(childId);
+  await m.readinessWeekDone(db, childId, today, week === 35 ? 35 : 34);
+  refresh();
+}
+
+export async function setTestDate(childId: string, date: string | null) {
+  const { db, today } = await readinessCtx(childId);
+  if (date !== null && (!isDateKey(date) || date > today)) return;
+  await m.setTestDate(db, childId, READINESS_TEST, date);
   refresh();
 }
 

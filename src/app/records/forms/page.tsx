@@ -1,7 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { cx, ui } from "@/components/ui/Controls";
+import { inArray } from "drizzle-orm";
+import { TestDateControl } from "@/components/teaching/ReadinessControls";
+import { getDb } from "@/db/client";
+import { testRecords } from "@/db/schema";
+import { isTestingGrade } from "@/lib/domain/compliance";
 import { fmtLong } from "@/lib/domain/dates";
+import { gradeLabel } from "@/lib/domain/grades";
+import { READINESS_GRADE, READINESS_TEST } from "@/lib/domain/readiness";
+import { GUIDE_HREF } from "@/server/readiness";
 import { declarationModel, declarationStatus, reportNotesFor, reportSubjects } from "@/server/forms/model";
 import { requireHousehold } from "@/server/session";
 import { householdContext } from "@/server/state";
@@ -19,6 +27,14 @@ export default async function FormsPage() {
   const subjects = reportSubjects(ctx);
   const notes = await Promise.all(h.children.map(async (c) => [c.id, await reportNotesFor(c.id, ctx.calendar.start)] as const));
   const noteMap = new Map(notes);
+  const testing = h.children.filter((c) => isTestingGrade(ctx.rules, c.grade));
+  const tests = testing.length
+    ? await (await getDb())
+        .select()
+        .from(testRecords)
+        .where(inArray(testRecords.childId, testing.map((c) => c.id)))
+    : [];
+  const testDate = (childId: string) => tests.find((r) => r.childId === childId && r.testId === READINESS_TEST)?.givenOn ?? null;
 
   return (
     <main data-screen-label="State forms" className={styles.screen}>
@@ -32,7 +48,7 @@ export default async function FormsPage() {
         <h1 className={styles.title}>State forms</h1>
         <p className={styles.lede}>
           {georgia
-            ? "Georgia asks for two things each year: a Declaration of Intent, filed with the state, and an annual progress report in each required subject, which you keep. Both are prepared here from your record."
+            ? "Georgia asks for two things each year: a Declaration of Intent, filed with the state, and an annual progress report in each required subject, which you keep. Both are prepared here from your record. At the end of Grades 3, 6, 9 and 12 there is also a standardized test, whose results you keep."
             : "State forms cover Georgia for now. The annual progress report below works anywhere; tell us your state and we’ll add its forms."}
         </p>
 
@@ -75,6 +91,42 @@ export default async function FormsPage() {
                 </div>
                 <p className={styles.muted}>Sign it, then file it with the Georgia Department of Education, online or by mail. Keep a copy.</p>
                 <FiledControl filedOn={status.filed ? fmtLong(status.filed.filedOn) : null} today={ctx.today} />
+              </section>
+            )}
+
+            {georgia && ctx.rules?.testing && (
+              <section className={cx(ui.card, styles.box)}>
+                <div className={styles.boxHead}>
+                  <span className={styles.boxTitle}>Standardized test</span>
+                  <span className={styles.badge}>Kept, not sent</span>
+                </div>
+                <p className={styles.muted}>
+                  {ctx.rules.testing.summary} {ctx.rules.testing.detail}
+                </p>
+                {testing.length === 0 && <p className={styles.muted}>No one is in a testing grade this year.</p>}
+                {testing.map((c) => (
+                  <div key={c.id} className={styles.subject}>
+                    <div className={styles.subjectName}>
+                      {c.name} · {gradeLabel(c.grade)}
+                    </div>
+                    {c.grade === READINESS_GRADE ? (
+                      <>
+                        <p className={styles.muted}>
+                          We recommend the California Achievement Test, given by the parent at home. <Link href={GUIDE_HREF}>The Grade 3 guide</Link> has a two-week
+                          readiness plan for weeks 34–35 and the test in week 36. Record only the date here; keep the score report with the portfolio.
+                        </p>
+                        <TestDateControl
+                          childId={c.id}
+                          givenOn={testDate(c.id)}
+                          givenLabel={testDate(c.id) ? fmtLong(testDate(c.id)!) : ""}
+                          today={ctx.today}
+                        />
+                      </>
+                    ) : (
+                      <p className={styles.muted}>A testing year. Our recommendation for this grade’s test will come with that grade.</p>
+                    )}
+                  </div>
+                ))}
               </section>
             )}
 

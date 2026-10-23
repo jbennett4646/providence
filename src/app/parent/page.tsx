@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { isTestingGrade } from "@/lib/domain/compliance";
+import { READINESS_GRADE, READINESS_TEST } from "@/lib/domain/readiness";
+import { GUIDE_HREF } from "@/server/readiness";
 import { dismissWeekNote, toggleElective } from "@/app/actions";
 import { ChildTabs } from "@/components/app/ChildTabs";
 import { ActionButton } from "@/components/ui/ActionButton";
@@ -362,6 +365,23 @@ async function Dashboard({ child, ctx, sent, weekNoteSeen, yearTitle, dayNum, ne
                   {att.days} of {requiredDays}
                 </span>
               </div>
+              {isTestingGrade(rules, child.grade) && (
+                <div className={styles.report}>
+                  <div>
+                    <div className={styles.reportLabel}>Standardized test</div>
+                    <div className={styles.reportDetail}>End of {gradeLabel(child.grade)} · results kept, not sent</div>
+                  </div>
+                  <span className={styles.reportValue}>
+                    {records.tests.get(READINESS_TEST) && child.grade === READINESS_GRADE ? (
+                      `Given ${fmtDayMonth(records.tests.get(READINESS_TEST)!)}`
+                    ) : child.grade === READINESS_GRADE ? (
+                      <Link href={GUIDE_HREF}>Week 36</Link>
+                    ) : (
+                      "End of year"
+                    )}
+                  </span>
+                </div>
+              )}
               <div className={styles.report}>
                 <div>
                   <div className={styles.reportLabel}>Next report due</div>
@@ -372,6 +392,7 @@ async function Dashboard({ child, ctx, sent, weekNoteSeen, yearTitle, dayNum, ne
               <div className={styles.reportFoot}>
                 {rules.name} asks once a year. The Declaration of Intent and the annual report are{" "}
                 <Link href="/records/forms">prepared from this record</Link>.
+                {rules.testing && " A standardized test comes at the end of Grades 3, 6, 9 and 12; the family keeps the results."}
               </div>
             </>
           ) : (

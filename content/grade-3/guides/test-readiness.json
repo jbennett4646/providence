@@ -1,0 +1,886 @@
+{
+ "title": "Grade 3 Test Readiness",
+ "subtitle": "Providence Home Academy · The Grade 3 standardized test · Two weeks at the end of Term 6",
+ "sections": [
+  {
+   "id": "at-a-glance",
+   "title": "At a glance",
+   "blocks": [
+    {
+     "kind": "facts",
+     "rows": [
+      [
+       "Our recommendation",
+       "The California Achievement Test (CAT), given by the parent at home"
+      ],
+      [
+       "Why a test at all",
+       "Georgia requires a national standardized test every three years, starting at the end of Grade 3 (then Grades 6, 9 and 12)"
+      ],
+      [
+       "When",
+       "Readiness practice in **weeks 34–35**; the test in **week 36** or the week after"
+      ],
+      [
+       "Daily time",
+       "15–20 minutes, alongside the normal Term 6 work"
+      ],
+      [
+       "Stakes",
+       "Low. Georgia asks families to **keep** the results, not send them in"
+      ]
+     ]
+    },
+    {
+     "kind": "p",
+     "text": "**Check before ordering.** Testing rules, versions and prices change. Confirm Georgia's current home-study requirements with the Georgia Department of Education, and the CAT's current versions and prices with the testing service."
+    }
+   ]
+  },
+  {
+   "id": "our-recommendation-the-cat",
+   "title": "Our recommendation: the CAT",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "We recommend one test for Grade 3: the **California Achievement Test**. Several homeschool testing services sell it, in paper and online versions."
+    },
+    {
+     "kind": "list",
+     "items": [
+      "**The parent can give it at home.** The child takes it at the kitchen table with a familiar adult, not in a strange room with a proctor.",
+      "**It's short and plain.** The sections are brief, and the questions are straightforward.",
+      "**It covers what Georgia asks for.** Reading, language arts and math. Some versions add science and social studies; either kind meets the requirement.",
+      "**It's affordable,** and the testing service scores it and sends back a report."
+     ]
+    },
+    {
+     "kind": "p",
+     "text": "**Why not a stricter test for Grade 3?** It's the child's first standardized test. A calm first experience matters more than a precise national comparison. For later testing years, we may recommend a different test; that will come with those grades."
+    }
+   ]
+  },
+  {
+   "id": "the-format-is-new-and-thats-fine",
+   "title": "The format is new, and that's fine",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Providence Home Academy students learn by narration, recitation and short written checks. They tell back what they read, recite what they've memorized, and write their answers in their own words. A standardized test asks the same knowledge in a different shape:"
+    },
+    {
+     "kind": "table",
+     "head": [
+      "What our students are used to",
+      "What the test does"
+     ],
+     "rows": [
+      [
+       "Telling back a story in their own words",
+       "Reading a short passage and choosing the best answer from four"
+      ],
+      [
+       "Writing an answer",
+       "Filling in a bubble"
+      ],
+      [
+       "Working until the job is done well",
+       "Working against a clock"
+      ],
+      [
+       "A parent who can see what they mean",
+       "A machine that reads only the bubble"
+      ]
+     ]
+    },
+    {
+     "kind": "p",
+     "text": "A child who knows the material can still lose points to the format: rushing, skipping a line on the answer sheet, or freezing at a question they've never seen phrased that way. **The two weeks of readiness practice exist only to remove that obstacle.** A little practice with the test's shape is not a betrayal of how we teach; it's teaching the child one more kind of task."
+    }
+   ]
+  },
+  {
+   "id": "low-stakes-what-to-tell-the-child",
+   "title": "Low stakes: what to tell the child",
+   "blocks": [
+    {
+     "kind": "quote",
+     "text": "\"This is a check-up, like a visit to the doctor. It shows what you know. Nothing changes because of it. Do your best, and if a question is hard, choose your best guess and keep going.\""
+    },
+    {
+     "kind": "list",
+     "items": [
+      "**Don't grade or reward the score.** Record it and file it.",
+      "**No cramming.** Fifteen or twenty minutes a day is plenty.",
+      "**A normal week.** Regular bedtime, breakfast, and a walk outside before the test."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "what-the-scores-mean",
+   "title": "What the scores mean",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The report compares the child with a national group of children in the same grade. A **percentile** of 60 means the child scored as well as or better than 60 out of 100 children in that group. A **grade equivalent** of 4.2 means the child scored about as well as a typical child in the second month of Grade 4, not that they're ready for Grade 4 work."
+    },
+    {
+     "kind": "p",
+     "text": "**A low score in one area** usually points to a format problem or a topic not yet taught, not to a weak student. Check the gap review below before worrying."
+    }
+   ]
+  },
+  {
+   "id": "the-two-week-plan",
+   "title": "The two-week plan",
+   "blocks": [
+    {
+     "kind": "plan",
+     "head": [
+      "Day",
+      "Week 34",
+      "Week 35"
+     ],
+     "days": [
+      {
+       "day": 1,
+       "week34": {
+        "title": "The answer sheet",
+        "text": "**The answer sheet.** Practice filling in bubbles: dark, inside the circle, one per question. Erase fully to change an answer."
+       },
+       "week35": {
+        "title": "Timed math",
+        "text": "**Timed math** (section below), 10 minutes."
+       }
+      },
+      {
+       "day": 2,
+       "week34": {
+        "title": "Reading passages",
+        "text": "**Reading passages.** Sample passage 1, untimed. Read the questions first, then the passage."
+       },
+       "week35": {
+        "title": "Gap review: science",
+        "text": "**Gap review: science** (below)."
+       }
+      },
+      {
+       "day": 3,
+       "week34": {
+        "title": "Language and spelling",
+        "text": "**Language and spelling.** Sample questions; \"find the mistake\" questions."
+       },
+       "week35": {
+        "title": "Timed reading",
+        "text": "**Timed reading**: sample passage 2, 10 minutes."
+       }
+      },
+      {
+       "day": 4,
+       "week34": {
+        "title": "Math",
+        "text": "**Math.** Sample questions; checking an answer by working backward."
+       },
+       "week35": {
+        "title": "Gap review: social studies and math",
+        "text": "**Gap review: social studies and math** (below)."
+       }
+      },
+      {
+       "day": 5,
+       "week34": {
+        "title": "Test strategies",
+        "text": "**Test strategies** (below). Talk them through, then try them on the samples."
+       },
+       "week35": {
+        "title": "A full practice round",
+        "text": "**A full practice round**: one sample set from each area with the answer sheet, under time. Then rest."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "test-strategies",
+   "title": "Test strategies",
+   "blocks": [
+    {
+     "kind": "steps",
+     "items": [
+      "**Read every answer before choosing.** The first one that looks right may not be the best one.",
+      "**Cross out the answers you know are wrong** (on scrap paper, or in the test booklet if allowed). Choosing between two is easier than between four.",
+      "**Don't get stuck.** If a question is hard, make your best guess, mark it, and come back if there's time. There's usually no penalty for guessing.",
+      "**Keep your place.** Check that question 7 in the booklet goes in row 7 on the answer sheet. Every five questions, check again.",
+      "**For a reading passage,** read the questions first, so you know what to look for.",
+      "**In math,** estimate first. If the answer choices are 18, 81, 180 and 810, and you know it's \"about 200,\" you're nearly there."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sample-questions",
+   "title": "Sample questions",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Fill in the bubble for the best answer. Practice on the answer sheet at the end."
+    },
+    {
+     "kind": "group",
+     "title": "Reading: passage 1",
+     "intro": null,
+     "passage": {
+      "title": "The Salt Box",
+      "text": "When Hannah's grandmother was a girl, there was no refrigerator in the farmhouse. In the fall, her father killed a hog and cut the meat into pieces. Hannah's grandmother helped rub each piece with salt and pack it into a wooden box. The salt drew the water out of the meat, and without water the meat could not spoil. All winter long, the family ate from the salt box. \"Salt was worth more than sugar to us,\" Grandmother said."
+     },
+     "questions": [
+      {
+       "n": 1,
+       "q": "Why did the family put salt on the meat?",
+       "options": [
+        "to make it taste sweet",
+        "to keep it from spoiling",
+        "to make it soft",
+        "to make it cook faster"
+       ]
+      },
+      {
+       "n": 2,
+       "q": "When did the family pack the meat?",
+       "options": [
+        "in the spring",
+        "in the summer",
+        "in the fall",
+        "all year"
+       ]
+      },
+      {
+       "n": 3,
+       "q": "In this story, the word **spoil** means:",
+       "options": [
+        "go bad",
+        "grow larger",
+        "freeze",
+        "get dry"
+       ]
+      },
+      {
+       "n": 4,
+       "q": "What is this passage **mostly** about?",
+       "options": [
+        "how a refrigerator works",
+        "how one family kept meat through the winter",
+        "why sugar costs money",
+        "how to raise a hog"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "group",
+     "title": "Reading: passage 2 (timed, 10 minutes)",
+     "intro": null,
+     "passage": {
+      "title": "The North Star",
+      "text": "Long ago, before there were maps on phones, travelers at night looked for one bright star. It sits almost exactly above the North Pole, so it stays in nearly the same place in the sky all night while the other stars seem to turn around it. Sailors called it the North Star. If you face it, you are facing north, and behind you is south. To find it, first find the Big Dipper. The two stars at the end of the Dipper's cup point straight to it."
+     },
+     "questions": [
+      {
+       "n": 5,
+       "q": "Why was the North Star useful to travelers?",
+       "options": [
+        "It was the brightest light in the sky.",
+        "It showed which way was north.",
+        "It rose early.",
+        "It was very large."
+       ]
+      },
+      {
+       "n": 6,
+       "q": "How do you find the North Star?",
+       "options": [
+        "Look for the moon.",
+        "Follow the two stars at the end of the Big Dipper's cup.",
+        "Face south.",
+        "Look at a phone."
+       ]
+      },
+      {
+       "n": 7,
+       "q": "If you face the North Star, what direction is behind you?",
+       "options": [
+        "east",
+        "west",
+        "north",
+        "south"
+       ]
+      },
+      {
+       "n": 8,
+       "q": "Which word means the **opposite** of **bright**?",
+       "options": [
+        "shiny",
+        "dim",
+        "tall",
+        "loud"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "group",
+     "title": "Language",
+     "intro": null,
+     "passage": null,
+     "questions": [
+      {
+       "n": 9,
+       "q": "Which sentence is written correctly?",
+       "options": [
+        "we went to boston in june.",
+        "We went to Boston in June.",
+        "We went to boston in June.",
+        "we went to Boston in june."
+       ]
+      },
+      {
+       "n": 10,
+       "q": "Choose the word that best completes the sentence: \"The two boys ___ to the store.\"",
+       "options": [
+        "walks",
+        "walking",
+        "walked",
+        "has walked"
+       ]
+      },
+      {
+       "n": 11,
+       "q": "Which word is a **noun**?",
+       "options": [
+        "quickly",
+        "happy",
+        "river",
+        "run"
+       ]
+      },
+      {
+       "n": 12,
+       "q": "Find the mistake. \"Sarah and me went fishing.\"",
+       "options": [
+        "Sarah",
+        "me",
+        "went",
+        "fishing"
+       ]
+      },
+      {
+       "n": 13,
+       "q": "Which word means **\"not happy\"**?",
+       "options": [
+        "rehappy",
+        "unhappy",
+        "happyful",
+        "prehappy"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "group",
+     "title": "Spelling",
+     "intro": "Choose the word that is spelled correctly.",
+     "passage": null,
+     "questions": [
+      {
+       "n": 14,
+       "q": "",
+       "options": [
+        "becaus",
+        "becuase",
+        "because",
+        "beacuse"
+       ]
+      },
+      {
+       "n": 15,
+       "q": "",
+       "options": [
+        "babys",
+        "babies",
+        "babyes",
+        "babeis"
+       ]
+      },
+      {
+       "n": 16,
+       "q": "\"The rabbit is ___ across the yard.\"",
+       "options": [
+        "hoping",
+        "hopeing",
+        "hopping",
+        "hoppeing"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "group",
+     "title": "Math concepts",
+     "intro": null,
+     "passage": null,
+     "questions": [
+      {
+       "n": 17,
+       "q": "What is the value of the 4 in 2,483?",
+       "options": [
+        "4",
+        "40",
+        "400",
+        "4,000"
+       ]
+      },
+      {
+       "n": 18,
+       "q": "Which fraction of the circle is shaded, if 1 of its 4 equal parts is shaded?",
+       "options": [
+        "½",
+        "⅓",
+        "¼",
+        "⅕"
+       ]
+      },
+      {
+       "n": 19,
+       "q": "Round 68 to the nearest ten.",
+       "options": [
+        "60",
+        "65",
+        "70",
+        "80"
+       ]
+      },
+      {
+       "n": 20,
+       "q": "A rectangle is 5 inches long and 3 inches wide. What is its perimeter?",
+       "options": [
+        "8 inches",
+        "15 inches",
+        "16 inches",
+        "30 inches"
+       ]
+      },
+      {
+       "n": 21,
+       "q": "The bar graph shows apples picked: Ben 6, Ann 9, Sam 4. How many more did Ann pick than Sam?",
+       "options": [
+        "3",
+        "4",
+        "5",
+        "13"
+       ]
+      },
+      {
+       "n": 22,
+       "q": "It's 2:15. What time will it be in 30 minutes?",
+       "options": [
+        "2:30",
+        "2:45",
+        "3:15",
+        "3:45"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "group",
+     "title": "Timed math (10 minutes)",
+     "intro": "Work as many as you can. Fill in the bubble for each.",
+     "passage": null,
+     "questions": [
+      {
+       "n": 23,
+       "q": "7 × 8 =",
+       "options": [
+        "54",
+        "56",
+        "63",
+        "64"
+       ]
+      },
+      {
+       "n": 24,
+       "q": "42 ÷ 6 =",
+       "options": [
+        "6",
+        "7",
+        "8",
+        "9"
+       ]
+      },
+      {
+       "n": 25,
+       "q": "365 + 248 =",
+       "options": [
+        "503",
+        "513",
+        "603",
+        "613"
+       ]
+      },
+      {
+       "n": 26,
+       "q": "500 − 137 =",
+       "options": [
+        "363",
+        "373",
+        "437",
+        "463"
+       ]
+      },
+      {
+       "n": 27,
+       "q": "23 × 3 =",
+       "options": [
+        "26",
+        "66",
+        "69",
+        "96"
+       ]
+      },
+      {
+       "n": 28,
+       "q": "9 × 6 =",
+       "options": [
+        "45",
+        "54",
+        "56",
+        "63"
+       ]
+      },
+      {
+       "n": 29,
+       "q": "Tom has 3 quarters and 2 dimes. How much money is that?",
+       "options": [
+        "85¢",
+        "95¢",
+        "$1.05",
+        "50¢"
+       ]
+      },
+      {
+       "n": 30,
+       "q": "4 boxes hold 6 pencils each. How many pencils in all?",
+       "options": [
+        "10",
+        "20",
+        "24",
+        "28"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "group",
+     "title": "Science",
+     "intro": null,
+     "passage": null,
+     "questions": [
+      {
+       "n": 31,
+       "q": "Which is a **liquid** at room temperature?",
+       "options": [
+        "ice",
+        "water",
+        "steam",
+        "a rock"
+       ]
+      },
+      {
+       "n": 32,
+       "q": "What does a plant need to make its own food?",
+       "options": [
+        "sunlight",
+        "darkness",
+        "salt",
+        "sand"
+       ]
+      },
+      {
+       "n": 33,
+       "q": "Why does the moon seem to change shape during a month?",
+       "options": [
+        "It grows and shrinks.",
+        "Clouds cover part of it.",
+        "We see different amounts of its sunlit side.",
+        "The earth's shadow always covers it."
+       ]
+      },
+      {
+       "n": 34,
+       "q": "A magnet will pick up:",
+       "options": [
+        "a paper clip",
+        "a penny",
+        "a plastic spoon",
+        "a wooden block"
+       ]
+      },
+      {
+       "n": 35,
+       "q": "What is a push or a pull called?",
+       "options": [
+        "a force",
+        "a gas",
+        "a mixture",
+        "a fossil"
+       ]
+      }
+     ]
+    },
+    {
+     "kind": "group",
+     "title": "Social studies",
+     "intro": null,
+     "passage": null,
+     "questions": [
+      {
+       "n": 36,
+       "q": "On a map, which direction is usually at the top?",
+       "options": [
+        "south",
+        "east",
+        "north",
+        "west"
+       ]
+      },
+      {
+       "n": 37,
+       "q": "What part of the government makes the laws?",
+       "options": [
+        "the President",
+        "Congress",
+        "the courts",
+        "the governor"
+       ]
+      },
+      {
+       "n": 38,
+       "q": "A baker sells bread. The bread is a:",
+       "options": [
+        "service",
+        "good",
+        "tax",
+        "vote"
+       ]
+      },
+      {
+       "n": 39,
+       "q": "What is the capital of Georgia?",
+       "options": [
+        "Savannah",
+        "Augusta",
+        "Atlanta",
+        "Macon"
+       ]
+      },
+      {
+       "n": 40,
+       "q": "A map key tells you:",
+       "options": [
+        "what the symbols on the map mean",
+        "who drew the map",
+        "how old the map is",
+        "where to buy a map"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "practice-answer-sheet",
+   "title": "Practice answer sheet",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "Fill in one bubble per row, dark and inside the circle."
+    },
+    {
+     "kind": "answersheet",
+     "count": 40
+    }
+   ]
+  },
+  {
+   "id": "answer-key",
+   "title": "Answer key",
+   "blocks": [
+    {
+     "kind": "key",
+     "rows": [
+      [
+       "Reading 1",
+       "1 B · 2 C · 3 A · 4 B"
+      ],
+      [
+       "Reading 2",
+       "5 B · 6 B · 7 D · 8 B"
+      ],
+      [
+       "Language",
+       "9 B · 10 C · 11 C · 12 B · 13 B"
+      ],
+      [
+       "Spelling",
+       "14 C · 15 B · 16 C"
+      ],
+      [
+       "Math concepts",
+       "17 C · 18 C · 19 C · 20 C · 21 C · 22 B"
+      ],
+      [
+       "Timed math",
+       "23 B · 24 B · 25 D · 26 A · 27 C · 28 B · 29 B · 30 C"
+      ],
+      [
+       "Science",
+       "31 B · 32 A · 33 C · 34 A · 35 A"
+      ],
+      [
+       "Social studies",
+       "36 C · 37 B · 38 B · 39 C · 40 A"
+      ]
+     ],
+     "answers": {
+      "1": "B",
+      "2": "C",
+      "3": "A",
+      "4": "B",
+      "5": "B",
+      "6": "B",
+      "7": "D",
+      "8": "B",
+      "9": "B",
+      "10": "C",
+      "11": "C",
+      "12": "B",
+      "13": "B",
+      "14": "C",
+      "15": "B",
+      "16": "C",
+      "17": "C",
+      "18": "C",
+      "19": "C",
+      "20": "C",
+      "21": "C",
+      "22": "B",
+      "23": "B",
+      "24": "B",
+      "25": "D",
+      "26": "A",
+      "27": "C",
+      "28": "B",
+      "29": "B",
+      "30": "C",
+      "31": "B",
+      "32": "A",
+      "33": "C",
+      "34": "A",
+      "35": "A",
+      "36": "C",
+      "37": "B",
+      "38": "B",
+      "39": "C",
+      "40": "A"
+     }
+    },
+    {
+     "kind": "p",
+     "text": "**A missed question** is a clue, not a mark against the child. Was it the format (a bubble in the wrong row, a rushed choice), or a topic not yet taught? If it's a topic, look for it in the gap review."
+    }
+   ]
+  },
+  {
+   "id": "gap-review",
+   "title": "Gap review",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "A national Grade 3 test covers topics in an order that isn't ours. Most of what it asks, our students have learned in Grades 1–3; a few things come later in our sequence. Spend one short session on each \"review\" item."
+    },
+    {
+     "kind": "table",
+     "head": [
+      "Area",
+      "Covered in our curriculum",
+      "Review before the test"
+     ],
+     "rows": [
+      [
+       "**Reading**",
+       "Literature (Grade 3): reading and narrating whole books",
+       "**Main idea** (\"what is this mostly about?\") and **choosing among four answers**. Our students know the story; practice naming its main idea in one sentence."
+      ],
+      [
+       "**Vocabulary**",
+       "Spelling and Vocabulary; Latin I",
+       "**Synonyms and antonyms** by name (\"same\" and \"opposite\"); the prefixes **un-, re-, pre-**."
+      ],
+      [
+       "**Language**",
+       "Grammar and Composition: parts of speech, sentence diagramming, capitalization and punctuation",
+       "**\"Find the mistake\"** questions; **I and me** (\"Sarah and I went\" / \"with Sarah and me\")."
+      ],
+      [
+       "**Spelling**",
+       "Spelling and Vocabulary: rules-based spelling",
+       "Picking the correct spelling **from a list** rather than writing it."
+      ],
+      [
+       "**Math**",
+       "Arithmetic (Grade 3): facts, place value, money, time, measurement, perimeter and area, fractions, geometry, graphs",
+       "Little to review. **Rounding** to the nearest ten and hundred, and **reading a bar graph** quickly."
+      ],
+      [
+       "**Science**",
+       "Life science (Grade 1) · Earth science and astronomy (Grade 2) · Chemistry and matter (Grade 3)",
+       "**Forces** (a push or a pull), **simple machines** (lever, ramp, pulley), and **light and sound**. These come in our Grade 4 physics year; a single short talk is enough."
+      ],
+      [
+       "**Social studies**",
+       "History and Geography (Grade 3): maps, the fifty states, the three branches",
+       "**Map tools** (compass rose, map key, scale); **goods and services**, **needs and wants**; local government (the **mayor** leads a city, the **governor** a state)."
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "notes-for-the-parent",
+   "title": "Notes for the parent",
+   "blocks": [
+    {
+     "kind": "list",
+     "items": [
+      "**Order the test early,** at least a month ahead, so the materials arrive by week 34.",
+      "**Follow the test's own directions** exactly, including any time limits. A practice round is for practice; the real test is given by the rules.",
+      "**Keep the score report** with the Grade 3 portfolio and the year-end records. Georgia asks that it be kept, not sent.",
+      "**Don't change the curriculum** because of one score. If an area is low, check the gap review, and mention it at the start of Grade 4."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "materials",
+   "title": "Materials",
+   "blocks": [
+    {
+     "kind": "p",
+     "text": "The CAT, ordered from a homeschool testing service · two sharp No. 2 pencils and a good eraser · a timer · scrap paper · this guide's sample questions and answer sheet"
+    }
+   ]
+  }
+ ]
+}
