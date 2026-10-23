@@ -49,6 +49,9 @@
       <div onClick="{{ goRecords }}" style="display:flex;flex-direction:column;justify-content:center;position:relative;cursor:pointer;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase" style-hover="color:#fff">Records
         <sc-if value="{{ isRecords }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--pa-accent,#A87C3D)"></div></sc-if>
       </div>
+      <div onClick="{{ goFaq }}" style="display:flex;flex-direction:column;justify-content:center;position:relative;cursor:pointer;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase" style-hover="color:#fff">FAQ
+        <sc-if value="{{ isFaq }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--pa-accent,#A87C3D)"></div></sc-if>
+      </div>
     </div>
     <span style="margin-left:auto;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#6B6154">Desktop · 1440</span>
   </div>
@@ -262,7 +265,125 @@
     <div style="background:#1F1B15;color:#8C8172;font-size:12px">
       <div style="max-width:1180px;margin:0 auto;padding:34px 40px;display:flex;justify-content:space-between">
         <span style="font-family:'EB Garamond',serif;letter-spacing:.1em;color:var(--pa-accent,#A87C3D)">PROVIDENCE HOME ACADEMY</span>
-        <span>Curriculum · Community · Tuition · Support</span>
+        <span onClick="{{ goFaq }}" style="cursor:pointer" style-hover="color:#E9DEC6">Curriculum · Community · Tuition · Questions</span>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ FAQ ============ -->
+  <sc-if value="{{ isFaq }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="FAQ">
+    <div style="background:#1F1B15;color:#EFE7D7">
+      <div style="max-width:1000px;margin:0 auto;padding:80px 40px 72px">
+        <div style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--pa-accent,#A87C3D);margin-bottom:18px">Questions</div>
+        <h1 style="font-family:'EB Garamond',serif;font-weight:500;font-size:54px;line-height:1.05;margin:0 0 18px;letter-spacing:-.01em;max-width:18ch;text-wrap:pretty">What families ask before they begin.</h1>
+        <p style="font-size:16px;line-height:1.7;color:#BFB49E;margin:0;max-width:52ch;text-wrap:pretty">If yours isn’t here, <a href="mailto:josh@joshwbennett.com" style="color:#E9DEC6;border-bottom:1px solid #6B6154">write to us</a>.</p>
+      </div>
+    </div>
+    <div style="max-width:1000px;margin:0 auto;padding:40px 40px 96px">
+      <div style="display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:40px;padding:34px 0 10px;border-top:1px solid #C9BB9E">
+        <div style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--pa-accent,#A87C3D);padding-top:28px">Joining</div>
+        <div style="display:flex;flex-direction:column">
+          <div style="display:flex;flex-direction:column;gap:8px;padding:22px 0;border-bottom:1px solid #DDD0B5">
+            <h3 style="font-family:'EB Garamond',serif;font-weight:500;font-size:22px;line-height:1.25;margin:0">Can we join in the middle of the year?</h3>
+            <p style="font-size:15px;line-height:1.7;color:#4A4337;margin:0;max-width:62ch;text-wrap:pretty">Yes. Your school year begins the day you start, and the calendar lays out 36 weeks from there. If you are switching from another program, enter the days you have already taught and your 180-day count carries over.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:22px 0;border-bottom:1px solid #DDD0B5">
+            <h3 style="font-family:'EB Garamond',serif;font-weight:500;font-size:22px;line-height:1.25;margin:0">Where will my child start?</h3>
+            <p style="font-size:15px;line-height:1.7;color:#4A4337;margin:0;max-width:62ch;text-wrap:pretty">A short placement check in each subject shows where your child stands. A child who is ahead begins at a later term; one who needs a firmer footing begins at the start. Each subject is placed on its own.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:22px 0;border-bottom:1px solid #DDD0B5">
+            <h3 style="font-family:'EB Garamond',serif;font-weight:500;font-size:22px;line-height:1.25;margin:0">What if my child is ahead in one subject and behind in another?</h3>
+            <p style="font-size:15px;line-height:1.7;color:#4A4337;margin:0;max-width:62ch;text-wrap:pretty">That is normal, and the program is built for it. Each subject keeps its own place, so a child can be in Term 4 of Arithmetic and Term 2 of Latin. A grade is certified only when every required subject for it is finished.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:22px 0;border-bottom:1px solid #DDD0B5">
+            <h3 style="font-family:'EB Garamond',serif;font-weight:500;font-size:22px;line-height:1.25;margin:0">Do I need teaching experience?</h3>
+            <p style="font-size:15px;line-height:1.7;color:#4A4337;margin:0;max-width:62ch;text-wrap:pretty">No. Every lesson from kindergarten through Grade 5 comes with a short script you can read aloud at the table. Answer keys and reference pages are in each course manual. The program is written for parents, not teachers.</p>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:40px;padding:34px 0 10px;border-top:1px solid #C9BB9E">
+        <div style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--pa-accent,#A87C3D);padding-top:28px">The school day</div>
+        <div style="display:flex;flex-direction:column">
+          <div style="display:flex;flex-direction:column;gap:8px;padding:22px 0;border-bottom:1px solid #DDD0B5">
+            <h3 style="font-family:'EB Garamond',serif;font-weight:500;font-size:22px;line-height:1.25;margin:0">How long is a school day?</h3>
+            <p style="font-size:15px;line-height:1.7;color:#4A4337;margin:0;max-width:62ch;text-wrap:pretty">About four and a half hours, with breaks. A short daily core keeps facts fresh; the rest of the week’s work rotates through the days.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:22px 0;border-bottom:1px solid #DDD0B5">
+            <h3 style="font-family:'EB Garamond',serif;font-weight:500;font-size:22px;line-height:1.25;margin:0">Does my child need a login?</h3>
+            <p style="font-size:15px;line-height:1.7;color:#4A4337;margin:0;max-width:62ch;text-wrap:pretty">Not through Grade 5. The early years are taught by a parent, so the parent holds the account. Students receive their own login beginning in Grade 6.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:22px 0;border-bottom:1px solid #DDD0B5">
+            <h3 style="font-family:'EB Garamond',serif;font-weight:500;font-size:22px;line-height:1.25;margin:0">Can we teach from paper instead of a screen?</h3>
+            <p style="font-size:15px;line-height:1.7;color:#4A4337;margin:0;max-width:62ch;text-wrap:pretty">Yes. Print the year plan once, then each term’s manual as it comes due. Once a week you check off what was done with one tap.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:22px 0;border-bottom:1px solid #DDD0B5">
+            <h3 style="font-family:'EB Garamond',serif;font-weight:500;font-size:22px;line-height:1.25;margin:0">What if we travel or miss days?</h3>
+            <p style="font-size:15px;line-height:1.7;color:#4A4337;margin:0;max-width:62ch;text-wrap:pretty">Add the break to your calendar and the plan moves with you. Only days you actually teach count toward your 180.</p>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:40px;padding:34px 0 10px;border-top:1px solid #C9BB9E">
+        <div style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--pa-accent,#A87C3D);padding-top:28px">Records & Georgia law</div>
+        <div style="display:flex;flex-direction:column">
+          <div style="display:flex;flex-direction:column;gap:8px;padding:22px 0;border-bottom:1px solid #DDD0B5">
+            <h3 style="font-family:'EB Garamond',serif;font-weight:500;font-size:22px;line-height:1.25;margin:0">Does this meet Georgia’s home study law?</h3>
+            <p style="font-size:15px;line-height:1.7;color:#4A4337;margin:0;max-width:62ch;text-wrap:pretty">Yes. Your records track 180 school days, four and a half hours a day, and the five required subjects: reading, language arts, mathematics, social studies and science.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:22px 0;border-bottom:1px solid #DDD0B5">
+            <h3 style="font-family:'EB Garamond',serif;font-weight:500;font-size:22px;line-height:1.25;margin:0">Who handles the Declaration of Intent and the annual report?</h3>
+            <p style="font-size:15px;line-height:1.7;color:#4A4337;margin:0;max-width:62ch;text-wrap:pretty">We do nearly all of it. We prepare your Declaration of Intent and annual progress report, filled in and ready to sign. You sign them, file the declaration (online, or by mail with your own stamp), and keep the progress report with your records. The Declaration is due within 30 days of starting and by September 1 each year after.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:22px 0;border-bottom:1px solid #DDD0B5">
+            <h3 style="font-family:'EB Garamond',serif;font-weight:500;font-size:22px;line-height:1.25;margin:0">Why no letter grades?</h3>
+            <p style="font-size:15px;line-height:1.7;color:#4A4337;margin:0;max-width:62ch;text-wrap:pretty">Our records show what a child has mastered and what is finished, so the record reflects real learning rather than a grade that overstates it.</p>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:40px;padding:34px 0 10px;border-top:1px solid #C9BB9E">
+        <div style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--pa-accent,#A87C3D);padding-top:28px">Other states</div>
+        <div style="display:flex;flex-direction:column">
+          <div style="display:flex;flex-direction:column;gap:8px;padding:22px 0;border-bottom:1px solid #DDD0B5">
+            <h3 style="font-family:'EB Garamond',serif;font-weight:500;font-size:22px;line-height:1.25;margin:0">We don’t live in Georgia. Can we join?</h3>
+            <p style="font-size:15px;line-height:1.7;color:#4A4337;margin:0;max-width:62ch;text-wrap:pretty">Yes. We teach entirely at home and online, so families anywhere are welcome. We began with Georgia because it is home: our founder lives here and was homeschooled here himself, so he knows the Declaration of Intent and the annual report firsthand. We are learning other states’ requirements and forms so we can prepare them for you as well.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:22px 0;border-bottom:1px solid #DDD0B5">
+            <h3 style="font-family:'EB Garamond',serif;font-weight:500;font-size:22px;line-height:1.25;margin:0">How do we get our state added?</h3>
+            <p style="font-size:15px;line-height:1.7;color:#4A4337;margin:0;max-width:62ch;text-wrap:pretty"><a href="mailto:josh@joshwbennett.com" style="color:var(--pa-deep,#7B2D26);border-bottom:1px solid #C4A78C">Write to us</a> and tell us where you live. Each request moves that state up our list.</p>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:40px;padding:34px 0 10px;border-top:1px solid #C9BB9E">
+        <div style="font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--pa-accent,#A87C3D);padding-top:28px">Tuition</div>
+        <div style="display:flex;flex-direction:column">
+          <div style="display:flex;flex-direction:column;gap:8px;padding:22px 0;border-bottom:1px solid #DDD0B5">
+            <h3 style="font-family:'EB Garamond',serif;font-weight:500;font-size:22px;line-height:1.25;margin:0">What does the household plan cover?</h3>
+            <p style="font-size:15px;line-height:1.7;color:#4A4337;margin:0;max-width:62ch;text-wrap:pretty">$100 a month covers your whole household, not each child.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:22px 0;border-bottom:1px solid #DDD0B5">
+            <h3 style="font-family:'EB Garamond',serif;font-weight:500;font-size:22px;line-height:1.25;margin:0">What does the parish or co-op plan cover?</h3>
+            <p style="font-size:15px;line-height:1.7;color:#4A4337;margin:0;max-width:62ch;text-wrap:pretty">$500 a month covers a group of unrelated families who learn together: a parish, a neighborhood, a co-op.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:22px 0;border-bottom:1px solid #DDD0B5">
+            <h3 style="font-family:'EB Garamond',serif;font-weight:500;font-size:22px;line-height:1.25;margin:0">Are the electives required?</h3>
+            <p style="font-size:15px;line-height:1.7;color:#4A4337;margin:0;max-width:62ch;text-wrap:pretty">No. Workshop and Hearth are optional for each child. They do not count toward grades or hold back a grade level.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:22px 0;border-bottom:1px solid #DDD0B5">
+            <h3 style="font-family:'EB Garamond',serif;font-weight:500;font-size:22px;line-height:1.25;margin:0">Is tutoring available?</h3>
+            <p style="font-size:15px;line-height:1.7;color:#4A4337;margin:0;max-width:62ch;text-wrap:pretty">Tutoring is coming. Pricing will be announced.</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;padding:22px 0;border-bottom:1px solid #DDD0B5">
+            <h3 style="font-family:'EB Garamond',serif;font-weight:500;font-size:22px;line-height:1.25;margin:0">Can we cancel?</h3>
+            <p style="font-size:15px;line-height:1.7;color:#4A4337;margin:0;max-width:62ch;text-wrap:pretty">Yes, at any time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="background:#1F1B15;color:#8C8172;font-size:12px">
+      <div style="max-width:1180px;margin:0 auto;padding:34px 40px;display:flex;justify-content:space-between">
+        <span style="font-family:'EB Garamond',serif;letter-spacing:.1em;color:var(--pa-accent,#A87C3D)">PROVIDENCE HOME ACADEMY</span>
+        <span>providence-home.academy</span>
       </div>
     </div>
   </div>
@@ -2425,6 +2546,7 @@ class Component extends DCLogic {
       isStudent: s.screen === 'student', isRecords: s.screen === 'records',
       isTeaching: s.screen === 'teaching', goTeaching: go('teaching'),
       isCalendar: s.screen === 'calendar', goCalendar: go('calendar'),
+      isFaq: s.screen === 'faq', goFaq: go('faq'),
       todayOff, todayOffName, todayOffLine: todayType === 'holiday' ? 'a federal holiday and a day off on your calendar' : 'part of a planned break on your calendar',
       calTitle: 'School year ' + calStartD.getFullYear() + '–' + String(calStartD.getFullYear() + 1).slice(2),
       calFirst: fmtL(calStartD), calLast: fmtL(lastD), calDayNum, calDayLabel: 'Day ' + calDayNum + ' of 180',
