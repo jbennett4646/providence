@@ -8,3 +8,9 @@
   min-width: 0;
   background: var(--pa-parchment);
 }
+
+@media (max-width: 820px) {
+  .shell {
+    flex-direction: column;
+  }
+}

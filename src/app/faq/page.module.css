@@ -101,3 +101,29 @@
   color: var(--pa-deep);
   border-bottom: 1px solid #c4a78c;
 }
+
+/* Phones: the group label sits above its questions. */
+@media (max-width: 820px) {
+  .heroInner {
+    padding-top: 48px;
+    padding-bottom: 44px;
+  }
+  .title {
+    font-size: 38px;
+  }
+  .body {
+    padding-top: 20px;
+    padding-bottom: 64px;
+  }
+  .group {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    padding-top: 26px;
+  }
+  .groupLabel {
+    padding-top: 0;
+  }
+  .question {
+    font-size: 20px;
+  }
+}

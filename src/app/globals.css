@@ -58,6 +58,13 @@
   --pa-gutter: 40px;
 }
 
+/* Phones and narrow windows: the page gutter shrinks to 16px everywhere. */
+@media (max-width: 820px) {
+  :root {
+    --pa-gutter: 16px;
+  }
+}
+
 html {
   overflow-y: scroll;
   scrollbar-gutter: stable;

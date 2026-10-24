@@ -175,3 +175,26 @@
   margin-top: 3px;
   min-height: 14px;
 }
+
+/* Phones and narrow windows: one column; address rows stack. */
+@media (max-width: 820px) {
+  .cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .box {
+    padding: 18px 16px 20px;
+  }
+  .row2,
+  .row3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .birth {
+    flex-wrap: wrap;
+  }
+  .birthInput {
+    width: auto;
+  }
+  .actions {
+    flex-wrap: wrap;
+  }
+}

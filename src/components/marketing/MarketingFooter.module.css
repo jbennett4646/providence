@@ -25,3 +25,10 @@
 .link:hover {
   color: var(--pa-on-dark-soft);
 }
+
+@media (max-width: 820px) {
+  .wrap {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

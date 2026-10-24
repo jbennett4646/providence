@@ -960,3 +960,108 @@
   padding: 5px 8px;
   font-size: 13px;
 }
+
+/*
+ * Phones and narrow windows: the header stacks, each card's course details
+ * run across the top instead of down the side, and two-column parts stack.
+ */
+@media (max-width: 820px) {
+  .wrap {
+    padding-top: 24px;
+  }
+  .head {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .headSide {
+    align-items: flex-start;
+  }
+  .sententia {
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px 18px 22px;
+  }
+  .sectionRow,
+  .sick,
+  .ckMain,
+  .timeHead,
+  .timeCols,
+  .recordRow,
+  .compactActions,
+  .sickActions,
+  .ckPrint,
+  .pqActions,
+  .testDate {
+    flex-wrap: wrap;
+  }
+  .sectionRow > *,
+  .sick > *,
+  .timeHead > *,
+  .timeCols > * {
+    flex: 1 1 100%;
+  }
+  .counter {
+    text-align: left;
+  }
+  .pauseNote {
+    white-space: normal;
+  }
+  .card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cardSide {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+    padding: 14px 16px 12px;
+    border-right: none;
+    border-bottom: 1px solid var(--pa-rule-1);
+  }
+  .cardSide .dots {
+    flex-basis: 100%;
+    margin-top: 0;
+  }
+  .mins {
+    margin-top: 0;
+    padding-top: 0;
+    margin-left: auto;
+  }
+  .fullBody,
+  .compactBody {
+    padding: 16px;
+  }
+  .fullGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+  .manualLink {
+    white-space: normal;
+  }
+  .lower {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .memory,
+  .tiles {
+    padding: 18px 16px;
+  }
+  .paperMain,
+  .printQueue {
+    flex-basis: 100%;
+  }
+  .printQueue {
+    position: static;
+  }
+  .paperHead,
+  .ckRow,
+  .logCard,
+  .printQueue {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .timeHead,
+  .timeCols {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}

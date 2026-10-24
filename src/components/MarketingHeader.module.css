@@ -65,3 +65,20 @@
   background: var(--pa-accent-hi);
   color: var(--pa-ink);
 }
+
+/* Phones: the brand and Begin enrollment on one row, the other links beneath. */
+@media (max-width: 820px) {
+  .header {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 16px 0 12px;
+    gap: 12px;
+  }
+  .name {
+    font-size: 18px;
+  }
+  .links {
+    flex-wrap: wrap;
+    gap: 12px 22px;
+  }
+}
