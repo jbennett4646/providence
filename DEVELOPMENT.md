@@ -1,10 +1,8 @@
 # Developing Providence Home Academy
 
-The working app for Providence Home Academy, a classical, parent-led K–12 homeschool platform. It is built from the design handoff in `design_handoff_providence_home_academy/` (the root `README.md` is the handoff brief, with the domain rules and screens).
+The working app for Providence Home Academy, a classical, parent-led K–12 homeschool platform. It was built from a design handoff (a prototype and brief, kept outside the repository); the root `README.md` is that brief, with the domain rules and screens.
 
 - `src/`: the Next.js (App Router) + TypeScript app.
-- `design_handoff_providence_home_academy/`: the prototype and production course content (`design/Grade 3/*.json`).
-- `site/`: the static prototype demo, published to GitHub Pages by `.github/workflows/static.yml`.
 
 ## Develop
 
@@ -22,7 +20,7 @@ Without `DATABASE_URL`, development uses an embedded Postgres (PGlite) stored in
 
 ## Data
 
-- **Course content** is static and versioned with the code: `content/grade-N/` holds `index.json` and one file per course, in the handoff's schema (copied from `design_handoff_providence_home_academy/design/Grade 3/`). `src/lib/content/` loads and validates it; `content.test.ts` checks every file's structure.
+- **Course content** is static and versioned with the code: `content/grade-N/` holds `index.json` and one file per course, in the handoff's schema. `src/lib/content/` loads and validates it; `content.test.ts` checks every file's structure.
 - **Database** (Postgres via Drizzle): `src/db/schema.ts` defines households, children, enrollments (each child's week per course), term checks, item records, attendance, streak, check-ins, printed booklets, family breaks and holidays taught. A `courses` catalog is imported from the content by `npm run db:setup`.
 - After changing `schema.ts`, run `npm run db:generate` to write a migration to `drizzle/`, and commit it. CI fails if the schema and migrations disagree.
 

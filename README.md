@@ -18,7 +18,7 @@ The files in `design/` are **design references built in HTML**. They are high-fi
 
 The course JSON in `design/Grade 3/` **is** production content. Keep its schema, and load it into the database or serve it as static content.
 
-To preview the prototype, open `design/index.html` through any static server (for example `npx serve design`). It fetches `Grade 3/*.json`, so opening it straight from disk won't load the courses. The live demo runs at jbennett4646.github.io/providence (repo `jbennett4646/providence`, published from `site/` via GitHub Pages Actions).
+The prototype files referred to here (`design/`) are kept outside this repository; the course JSON now lives in `content/`.
 
 ## Fidelity
 **High fidelity.** Match the colors, type, spacing and copy exactly. All styling is inline in the prototype; extract it into components and tokens (see Design tokens below).
